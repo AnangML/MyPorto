@@ -1,3 +1,5 @@
+@props(['profile' => null])
+
 <section class="px-2 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-12 lg:pb-20 relative overflow-hidden">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
         
@@ -5,12 +7,14 @@
         <div class="lg:col-span-7 flex flex-col items-start gap-6 sm:gap-7 z-10 reveal-on-scroll">
             
             <!-- Availability Pill Badge (Soft Blue Tech Accent) -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/80 text-xs font-medium text-blue-700 dark:text-blue-300 tracking-wide shadow-xs">
-                <svg class="w-3.5 h-3.5 text-blue-600 dark:text-sky-400 fill-current animate-pulse" viewBox="0 0 24 24">
-                    <path d="M12 2l2.4 7.2h7.6l-6.1 4.5 2.3 7.3-6.2-4.6-6.2 4.6 2.3-7.3-6.1-4.5h7.6z"/>
-                </svg>
-                <span>{{ __('portfolio.hero.availability') }}</span>
-            </div>
+            @if(!isset($profile) || $profile?->availability_status)
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/80 text-xs font-medium text-blue-700 dark:text-blue-300 tracking-wide shadow-xs">
+                    <svg class="w-3.5 h-3.5 text-blue-600 dark:text-sky-400 fill-current animate-pulse" viewBox="0 0 24 24">
+                        <path d="M12 2l2.4 7.2h7.6l-6.1 4.5 2.3 7.3-6.2-4.6-6.2 4.6 2.3-7.3-6.1-4.5h7.6z"/>
+                    </svg>
+                    <span>{{ __('portfolio.hero.availability') }}</span>
+                </div>
+            @endif
 
             <!-- Main Editorial Headline with Vibrant Blue Serif Accent -->
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] leading-[1.08] max-w-xl">
@@ -23,9 +27,9 @@
                 </span>
             </h1>
 
-            <!-- Bio Subtitle -->
+            <!-- Bio Subtitle (Dynamic from DB with fallback) -->
             <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
-                {{ __('portfolio.hero.bio') }}
+                {{ $profile?->bio ?: __('portfolio.hero.bio') }}
             </p>
 
             <!-- Action Buttons Group (Matches Reference: Solid Primary + Outline Secondary) -->
