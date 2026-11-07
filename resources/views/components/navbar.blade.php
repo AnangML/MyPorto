@@ -1,26 +1,26 @@
 <header class="pt-6 sm:pt-8 px-4 sm:px-8 flex justify-center sticky top-0 z-50">
-    <nav class="backdrop-blur-md bg-white/80 dark:bg-[#1E293B]/85 border border-slate-200/80 dark:border-slate-700/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none rounded-full px-3 py-2 sm:px-5 sm:py-2.5 flex items-center justify-between sm:justify-center gap-3 sm:gap-6 transition-all duration-200">
+    <nav class="backdrop-blur-md bg-white/85 dark:bg-[#1E293B]/90 border border-slate-200/80 dark:border-slate-700/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none rounded-full px-3 py-2 sm:px-4 sm:py-2 flex items-center justify-between sm:justify-center gap-2 sm:gap-4 transition-all duration-200">
         
         <!-- Monogram / Initial Badge -->
-        <a href="{{ route('home') }}" class="w-8 h-8 rounded-full bg-[#0F172A] dark:bg-white text-white dark:text-[#0F172A] flex items-center justify-center font-bold text-xs tracking-wider transition-transform hover:scale-105 shadow-sm" title="Anang Muhamad Lutfi">
+        <a href="{{ route('home') }}#home" data-target="home" class="nav-anchor w-8 h-8 rounded-full bg-[#0F172A] dark:bg-white text-white dark:text-[#0F172A] flex items-center justify-center font-bold text-xs tracking-wider transition-transform hover:scale-105 shadow-sm shrink-0" title="Anang Muhamad Lutfi">
             A
         </a>
 
-        <!-- Desktop Navigation Links -->
-        <div class="hidden sm:flex items-center gap-6 text-sm font-medium">
-            <a href="{{ route('home') }}" class="text-[#0F172A] dark:text-[#F8FAFC] hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+        <!-- Desktop Navigation Links (Pill Navigation with Vibrant Blue Active State) -->
+        <div id="desktop-nav-links" class="hidden sm:flex items-center gap-1 text-sm">
+            <a href="{{ route('home') }}#home" data-target="home" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 bg-blue-600 text-white shadow-[0_2px_12px_rgba(37,99,235,0.35)] dark:bg-blue-600 dark:text-white">
                 {{ __('portfolio.nav.home') }}
             </a>
-            <a href="#about" class="text-slate-500 dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a href="{{ route('home') }}#about" data-target="about" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
                 {{ __('portfolio.nav.about') }}
             </a>
-            <a href="#work" class="text-slate-500 dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a href="{{ route('home') }}#work" data-target="work" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
                 {{ __('portfolio.nav.work') }}
             </a>
-            <a href="#blog" class="text-slate-500 dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a href="{{ route('home') }}#blog" data-target="blog" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
                 {{ __('portfolio.nav.blog') }}
             </a>
-            <a href="#contact" class="text-slate-500 dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a href="{{ route('home') }}#contact" data-target="contact" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
                 {{ __('portfolio.nav.contact') }}
             </a>
         </div>
@@ -28,7 +28,7 @@
         <div class="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
 
         <!-- Utilities: Language & Theme -->
-        <div class="flex items-center gap-2 text-xs font-medium">
+        <div class="flex items-center gap-1.5 text-xs font-medium">
             <!-- Language Switcher -->
             <div class="flex items-center rounded-full bg-slate-100/90 dark:bg-[#0F172A] p-0.5 border border-slate-200/70 dark:border-slate-700/70">
                 <a href="{{ route('locale.switch', 'id') }}" class="px-2.5 py-1 rounded-full transition-colors {{ app()->getLocale() === 'id' ? 'bg-[#0F172A] text-white dark:bg-white dark:text-[#0F172A] shadow-xs' : 'text-slate-600 hover:text-blue-600 dark:text-slate-400' }}">
@@ -62,21 +62,21 @@
 </header>
 
 <!-- Mobile Menu Drawer -->
-<div id="mobile-menu" class="hidden sm:hidden fixed inset-x-4 top-20 z-40 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-6 transition-all duration-300">
-    <div class="flex flex-col gap-4 text-base font-medium">
-        <a href="{{ route('home') }}" class="text-[#0F172A] dark:text-[#F8FAFC] py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+<div id="mobile-menu" class="hidden sm:hidden fixed inset-x-4 top-20 z-40 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-4 transition-all duration-300">
+    <div class="flex flex-col gap-1.5 text-sm font-medium">
+        <a href="{{ route('home') }}#home" data-target="home" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-sky-400 font-semibold border-l-4 border-blue-600">
             {{ __('portfolio.nav.home') }}
         </a>
-        <a href="#about" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+        <a href="{{ route('home') }}#about" data-target="about" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
             {{ __('portfolio.nav.about') }}
         </a>
-        <a href="#work" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+        <a href="{{ route('home') }}#work" data-target="work" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
             {{ __('portfolio.nav.work') }}
         </a>
-        <a href="#blog" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-1 border-b border-slate-200/60 dark:border-slate-700/60">
+        <a href="{{ route('home') }}#blog" data-target="blog" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
             {{ __('portfolio.nav.blog') }}
         </a>
-        <a href="#contact" class="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 py-1">
+        <a href="{{ route('home') }}#contact" data-target="contact" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
             {{ __('portfolio.nav.contact') }}
         </a>
     </div>
@@ -84,15 +84,169 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // Mobile menu toggle
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         if (btn && menu) {
             btn.addEventListener('click', () => {
                 menu.classList.toggle('hidden');
             });
-            menu.querySelectorAll('a').forEach(a => {
-                a.addEventListener('click', () => menu.classList.add('hidden'));
+        }
+
+        // Section IDs for scrollspy
+        const sectionIds = ['home', 'about', 'work', 'blog', 'contact'];
+
+        // Class definitions for active & inactive states
+        const DESKTOP_ACTIVE = ['bg-blue-600', 'text-white', 'shadow-[0_2px_12px_rgba(37,99,235,0.35)]', 'dark:bg-blue-600', 'dark:text-white', 'font-semibold'];
+        const DESKTOP_INACTIVE = ['text-slate-600', 'dark:text-slate-400', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'hover:bg-slate-100/70', 'dark:hover:bg-slate-800/70', 'font-medium'];
+
+        const MOBILE_ACTIVE = ['bg-blue-50', 'dark:bg-blue-950/60', 'text-blue-600', 'dark:text-sky-400', 'font-semibold', 'border-l-4', 'border-blue-600'];
+        const MOBILE_INACTIVE = ['text-slate-600', 'dark:text-slate-400', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'hover:bg-slate-50', 'dark:hover:bg-slate-800/50', 'font-medium'];
+
+        let activeSection = 'home';
+        let isManualScrolling = false;
+        let manualScrollTimer = null;
+
+        // Function to update the navbar active state styling
+        function setActive(targetId) {
+            if (!sectionIds.includes(targetId)) return;
+            if (activeSection === targetId && document.querySelector(`.nav-spy-link[data-target="${targetId}"].bg-blue-600`)) return;
+
+            activeSection = targetId;
+
+            // Update Desktop Links
+            document.querySelectorAll('.nav-spy-link').forEach(link => {
+                const target = link.getAttribute('data-target');
+                if (target === targetId) {
+                    DESKTOP_INACTIVE.forEach(c => link.classList.remove(c));
+                    DESKTOP_ACTIVE.forEach(c => link.classList.add(c));
+                } else {
+                    DESKTOP_ACTIVE.forEach(c => link.classList.remove(c));
+                    DESKTOP_INACTIVE.forEach(c => link.classList.add(c));
+                }
             });
+
+            // Update Mobile Links
+            document.querySelectorAll('.mobile-spy-link').forEach(link => {
+                const target = link.getAttribute('data-target');
+                if (target === targetId) {
+                    MOBILE_INACTIVE.forEach(c => link.classList.remove(c));
+                    MOBILE_ACTIVE.forEach(c => link.classList.add(c));
+                } else {
+                    MOBILE_ACTIVE.forEach(c => link.classList.remove(c));
+                    MOBILE_INACTIVE.forEach(c => link.classList.add(c));
+                }
+            });
+        }
+
+        // Smooth scroll to target element with offset for sticky navbar
+        function scrollToTarget(targetId) {
+            const targetEl = document.getElementById(targetId);
+            if (!targetEl) return false;
+
+            isManualScrolling = true;
+            setActive(targetId);
+
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+
+            const navOffset = 88; // Floating sticky header offset
+            const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = Math.max(0, elementPosition - navOffset);
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
+            if (history.pushState) {
+                history.pushState(null, '', '#' + targetId);
+            }
+
+            clearTimeout(manualScrollTimer);
+            manualScrollTimer = setTimeout(() => {
+                isManualScrolling = false;
+            }, 850);
+
+            return true;
+        }
+
+        // Intercept clicks on nav-anchor and in-page anchor links pointing to sections
+        document.addEventListener('click', (e) => {
+            const anchor = e.target.closest('a[href*="#"]');
+            if (!anchor) return;
+
+            const href = anchor.getAttribute('href');
+            const hashIndex = href.indexOf('#');
+            if (hashIndex === -1) return;
+
+            const targetId = href.substring(hashIndex + 1);
+            if (!sectionIds.includes(targetId)) return;
+
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                scrollToTarget(targetId);
+            }
+        });
+
+        // Scrollspy calculation using requestAnimationFrame
+        let scrollTicking = false;
+        function onScroll() {
+            if (isManualScrolling) return;
+
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+
+            // If scrolled near the bottom of the page, activate the contact section
+            if (scrollY + windowHeight >= documentHeight - 60) {
+                setActive('contact');
+                return;
+            }
+
+            // If at the very top of the page, activate home
+            if (scrollY < 120) {
+                setActive('home');
+                return;
+            }
+
+            // Find current section in view
+            const navOffset = 130;
+            let current = 'home';
+
+            for (const id of sectionIds) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const top = el.offsetTop - navOffset;
+                    if (scrollY >= top) {
+                        current = id;
+                    }
+                }
+            }
+
+            setActive(current);
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(() => {
+                    onScroll();
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
+        }, { passive: true });
+
+        // Check hash on initial load
+        if (window.location.hash) {
+            const hashTarget = window.location.hash.substring(1);
+            if (sectionIds.includes(hashTarget)) {
+                setTimeout(() => {
+                    scrollToTarget(hashTarget);
+                }, 100);
+            }
         }
     });
 </script>

@@ -2,8 +2,89 @@
     <!-- Hero Section -->
     <x-hero :profile="$profile" />
 
+    <!-- About & Engineering Matrix + Background Wrapper -->
+    <div id="about" class="scroll-mt-24">
+        <!-- Skills & Technology Matrix -->
+        <section class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
+            <div class="max-w-2xl mb-8">
+                <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Technical Matrix</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
+                    Skills &amp; Engineering Stack
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">
+                    Teknologi dan spesialisasi yang digunakan untuk membangun sistem yang aman, skalabel, dan efisien.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @foreach(['backend' => 'Backend & Architecture', 'database' => 'Databases & Storage', 'frontend' => 'Frontend & Styling', 'tools' => 'DevOps & Tools'] as $key => $title)
+                    <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs">
+                        <h3 class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC] pb-3 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                            <span>{{ $title }}</span>
+                            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                        </h3>
+                        <ul class="mt-4 space-y-2.5">
+                            @forelse($skills[$key] ?? [] as $skill)
+                                <li class="flex items-start justify-between gap-2 text-xs">
+                                    <span class="font-medium text-slate-700 dark:text-slate-200">{{ $skill->name }}</span>
+                                    @if($skill->description)
+                                        <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono text-right truncate max-w-[120px]" title="{{ $skill->description }}">
+                                            {{ $skill->description }}
+                                        </span>
+                                    @endif
+                                </li>
+                            @empty
+                                <li class="text-xs text-slate-400">Stack info coming soon</li>
+                            @endforelse
+                        </ul>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        <!-- Experiences & Education Timeline -->
+        <section class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
+            <div class="max-w-2xl mb-8">
+                <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Background</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
+                    Experience &amp; Education
+                </h2>
+            </div>
+
+            <div class="space-y-6 max-w-3xl">
+                @forelse($experiences as $exp)
+                    <div class="relative pl-6 sm:pl-8 border-l-2 border-blue-200 dark:border-blue-900 group">
+                        <!-- Timeline Node -->
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-[#0A0F1D] border-2 border-blue-600 group-hover:scale-110 transition-transform"></div>
+                        
+                        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
+                            <h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                                {{ $exp->position }}
+                            </h3>
+                            <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-medium">
+                                {{ $exp->started_at->format('Y') }} — {{ $exp->is_current ? 'Present' : $exp->ended_at?->format('Y') }}
+                            </span>
+                        </div>
+
+                        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">
+                            {{ $exp->organization }} &bull; {{ $exp->location ?? 'Indonesia' }}
+                        </div>
+
+                        @if($exp->description)
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                {{ $exp->description }}
+                            </p>
+                        @endif
+                    </div>
+                @empty
+                    <div class="text-xs text-slate-400">No experiences listed yet.</div>
+                @endforelse
+            </div>
+        </section>
+    </div>
+
     <!-- Featured Projects Showcase (With Alpine.js Category Filter) -->
-    <section id="work" class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll" x-data="{ activeCategory: 'all' }">
+    <section id="work" class="scroll-mt-24 px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll" x-data="{ activeCategory: 'all' }">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
             <div>
                 <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Featured Work</span>
@@ -119,86 +200,51 @@
         </div>
     </section>
 
-    <!-- Skills & Technology Matrix -->
-    <section id="about" class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
-        <div class="max-w-2xl mb-8">
-            <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Technical Matrix</span>
-            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
-                Skills &amp; Engineering Stack
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2">
-                Teknologi dan spesialisasi yang digunakan untuk membangun sistem yang aman, skalabel, dan efisien.
-            </p>
+    <!-- Engineering Notes & Blog Section -->
+    <section id="blog" class="scroll-mt-24 px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Articles &amp; Writing</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
+                    Engineering Notes
+                </h2>
+            </div>
+            <span class="text-xs font-mono text-slate-400 dark:text-slate-500">
+                Insights &bull; Architecture
+            </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach(['backend' => 'Backend & Architecture', 'database' => 'Databases & Storage', 'frontend' => 'Frontend & Styling', 'tools' => 'DevOps & Tools'] as $key => $title)
-                <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs">
-                    <h3 class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC] pb-3 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
-                        <span>{{ $title }}</span>
-                        <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                    </h3>
-                    <ul class="mt-4 space-y-2.5">
-                        @forelse($skills[$key] ?? [] as $skill)
-                            <li class="flex items-start justify-between gap-2 text-xs">
-                                <span class="font-medium text-slate-700 dark:text-slate-200">{{ $skill->name }}</span>
-                                @if($skill->description)
-                                    <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono text-right truncate max-w-[120px]" title="{{ $skill->description }}">
-                                        {{ $skill->description }}
-                                    </span>
-                                @endif
-                            </li>
-                        @empty
-                            <li class="text-xs text-slate-400">Stack info coming soon</li>
-                        @endforelse
-                    </ul>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs hover:border-blue-300 dark:hover:border-blue-500/60 transition-all">
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-medium">PostgreSQL &bull; Performance</span>
+                <h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-3 hover:text-blue-600 dark:hover:text-sky-400 transition-colors">
+                    Indexing Strategies for High-Volume Relational Queries in Laravel 12
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                    A deep dive into partial indexes, composite B-Trees, and JSONB query optimization techniques on PostgreSQL.
+                </p>
+                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 text-[11px] text-slate-400 font-mono">
+                    Coming Soon &bull; 5 min read
                 </div>
-            @endforeach
-        </div>
-    </section>
+            </div>
 
-    <!-- Experiences & Education Timeline -->
-    <section class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
-        <div class="max-w-2xl mb-8">
-            <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Background</span>
-            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
-                Experience &amp; Education
-            </h2>
-        </div>
-
-        <div class="space-y-6 max-w-3xl">
-            @forelse($experiences as $exp)
-                <div class="relative pl-6 sm:pl-8 border-l-2 border-blue-200 dark:border-blue-900 group">
-                    <!-- Timeline Node -->
-                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-[#0A0F1D] border-2 border-blue-600 group-hover:scale-110 transition-transform"></div>
-                    
-                    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-1">
-                        <h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">
-                            {{ $exp->position }}
-                        </h3>
-                        <span class="text-xs font-mono text-blue-600 dark:text-sky-400 font-medium">
-                            {{ $exp->started_at->format('Y') }} — {{ $exp->is_current ? 'Present' : $exp->ended_at?->format('Y') }}
-                        </span>
-                    </div>
-
-                    <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2">
-                        {{ $exp->organization }} &bull; {{ $exp->location ?? 'Indonesia' }}
-                    </div>
-
-                    @if($exp->description)
-                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            {{ $exp->description }}
-                        </p>
-                    @endif
+            <div class="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs hover:border-blue-300 dark:hover:border-blue-500/60 transition-all">
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-medium">Backend &bull; Architecture</span>
+                <h3 class="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-3 hover:text-blue-600 dark:hover:text-sky-400 transition-colors">
+                    Designing Idempotent Webhook Handlers with Zero Data Loss
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed">
+                    Implementing robust concurrency locks, deduplication keys, and transactional event dispatchers in mission-critical services.
+                </p>
+                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 text-[11px] text-slate-400 font-mono">
+                    Coming Soon &bull; 7 min read
                 </div>
-            @empty
-                <div class="text-xs text-slate-400">No experiences listed yet.</div>
-            @endforelse
+            </div>
         </div>
     </section>
 
     <!-- Interactive Contact Form Section -->
-    <section id="contact" class="px-2 sm:px-6 lg:px-8 py-16 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
+    <section id="contact" class="scroll-mt-24 px-2 sm:px-6 lg:px-8 py-16 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             
             <!-- Left Column: Context & Contact Details -->

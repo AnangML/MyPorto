@@ -29,6 +29,23 @@ class PublicPortfolioTest extends TestCase
         $response->assertSee('Let\'s Talk');
     }
 
+    public function test_navbar_contains_scrollspy_sections_and_links(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('data-target="home"', false);
+        $response->assertSee('data-target="about"', false);
+        $response->assertSee('data-target="work"', false);
+        $response->assertSee('data-target="blog"', false);
+        $response->assertSee('data-target="contact"', false);
+        $response->assertSee('id="home"', false);
+        $response->assertSee('id="about"', false);
+        $response->assertSee('id="work"', false);
+        $response->assertSee('id="blog"', false);
+        $response->assertSee('id="contact"', false);
+    }
+
     public function test_can_switch_locale_to_indonesian(): void
     {
         $switchResponse = $this->get('/locale/id');
