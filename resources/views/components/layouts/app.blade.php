@@ -6,7 +6,33 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? 'Anang Muhamad Lutfi — Backend & Web Developer' }}</title>
-    <meta name="description" content="Personal portfolio of Anang Muhamad Lutfi, a passionate Backend and Web Developer crafting reliable web systems, robust APIs, and scalable architectures.">
+    <meta name="description" content="{{ $description ?? 'Personal portfolio of Anang Muhamad Lutfi, a Backend and Web Developer crafting reliable web systems, robust APIs, and scalable architectures.' }}">
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    <!-- Open Graph & Social Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $title ?? 'Anang Muhamad Lutfi — Backend & Web Developer' }}">
+    <meta property="og:description" content="{{ $description ?? 'Personal portfolio of Anang Muhamad Lutfi, a Backend and Web Developer crafting reliable web systems, robust APIs, and scalable architectures.' }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Anang Muhamad Lutfi Portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'Anang Muhamad Lutfi — Backend & Web Developer' }}">
+    <meta name="twitter:description" content="{{ $description ?? 'Personal portfolio of Anang Muhamad Lutfi, a Backend and Web Developer crafting reliable web systems, robust APIs, and scalable architectures.' }}">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Person',
+        'name' => 'Anang Muhamad Lutfi',
+        'jobTitle' => 'Backend & Web Developer',
+        'alumniOf' => 'Universitas Pamulang',
+        'url' => url('/'),
+        'sameAs' => [
+            'https://github.com/AnangML',
+        ],
+    ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 
     <!-- Fonts: Plus Jakarta Sans & Instrument Serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

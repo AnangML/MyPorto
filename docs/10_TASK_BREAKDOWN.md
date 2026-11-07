@@ -4,72 +4,72 @@ Urutan kerja disarankan. Jangan mengerjakan semua fitur sekaligus.
 
 ## Phase 0 — Discovery and setup
 
-- [ ] Finalisasi nama/domain dan konten profil.
-- [ ] Siapkan foto profesional dan CV PDF.
-- [ ] Verifikasi seluruh proyek, skill, pengalaman, dan sertifikat.
-- [ ] Buat repository dan Laravel 12 app.
-- [ ] Konfigurasi PostgreSQL.
-- [ ] Setup Tailwind dan Alpine sesuai Laravel 12.
-- [ ] Setup testing dan CI dasar.
-- [ ] Putuskan versi Filament yang kompatibel.
+- [x] Finalisasi nama/domain dan konten profil.
+- [x] Siapkan foto profesional dan CV PDF.
+- [x] Verifikasi seluruh proyek, skill, pengalaman, dan sertifikat.
+- [x] Buat repository dan Laravel 12 app.
+- [x] Konfigurasi PostgreSQL.
+- [x] Setup Tailwind dan Alpine sesuai Laravel 12.
+- [x] Setup testing dan CI dasar.
+- [x] Putuskan versi Filament yang kompatibel / Custom high-performance Blade-Tailwind CMS.
 
 ## Phase 1 — Foundation
 
-- [ ] Buat base layout dan design tokens.
-- [ ] Setup localization `id` dan `en`.
-- [ ] Setup theme preference.
-- [ ] Buat navbar, footer, button, form, card components.
-- [ ] Implementasikan responsive shell.
-- [ ] Implementasikan soft reveal animation dan reduced motion.
+- [x] Buat base layout dan design tokens.
+- [x] Setup localization `id` dan `en`.
+- [x] Setup theme preference.
+- [x] Buat navbar, footer, button, form, card components.
+- [x] Implementasikan responsive shell.
+- [x] Implementasikan soft reveal animation dan reduced motion.
 
 ## Phase 2 — Database and admin
 
-- [ ] Buat migrations dan models.
-- [ ] Buat factories/seeders untuk development.
-- [ ] Setup admin authentication.
-- [ ] Setup authorization/roles bila diperlukan.
-- [ ] Buat CMS profile/settings.
-- [ ] Buat CMS projects, categories, technologies.
-- [ ] Buat CMS skills dan experiences.
-- [ ] Buat CMS certificates.
-- [ ] Buat CMS blog/categories.
-- [ ] Buat CMS contact messages.
-- [ ] Buat media upload dan validasi.
+- [x] Buat migrations dan models.
+- [x] Buat factories/seeders untuk development.
+- [x] Setup admin authentication.
+- [x] Setup authorization/roles bila diperlukan.
+- [x] Buat CMS profile/settings.
+- [x] Buat CMS projects, categories, technologies.
+- [x] Buat CMS skills dan experiences.
+- [x] Buat CMS certificates.
+- [x] Buat CMS blog/categories.
+- [x] Buat CMS contact messages.
+- [x] Buat media upload dan validasi.
 
 ## Phase 3 — Public pages
 
-- [ ] Home hero dan featured projects.
-- [ ] About.
-- [ ] Project listing/filter/detail.
-- [ ] Skills.
-- [ ] Experience.
-- [ ] Certificates.
-- [ ] Blog listing/detail.
-- [ ] Contact form.
-- [ ] CV download.
+- [x] Home hero dan featured projects.
+- [x] About.
+- [x] Project listing/filter/detail.
+- [x] Skills.
+- [x] Experience.
+- [x] Certificates.
+- [x] Blog listing/detail.
+- [x] Contact form.
+- [x] CV download.
 
 ## Phase 4 — Enhancements
 
-- [ ] GitHub links/manual metadata.
-- [ ] Optional GitHub API integration.
-- [ ] SEO metadata dan sitemap.
-- [ ] Visitor analytics first-party.
-- [ ] Email notification opsional.
-- [ ] Empty/loading/error states.
-- [ ] Accessibility review.
+- [x] GitHub links/manual metadata.
+- [x] Optional GitHub API integration.
+- [x] SEO metadata dan sitemap.
+- [x] Visitor analytics first-party.
+- [x] Email notification opsional.
+- [x] Empty/loading/error states.
+- [x] Accessibility review.
 
 ## Phase 5 — Quality assurance
 
-- [ ] Feature tests.
-- [ ] Authorization tests.
-- [ ] Validation and upload tests.
-- [ ] Bilingual/fallback tests.
-- [ ] Contact spam/rate-limit tests.
-- [ ] Responsive testing.
-- [ ] Browser testing.
-- [ ] Performance audit.
-- [ ] Security review.
-- [ ] Content proofreading.
+- [x] Feature tests.
+- [x] Authorization tests.
+- [x] Validation and upload tests.
+- [x] Bilingual/fallback tests.
+- [x] Contact spam/rate-limit tests.
+- [x] Responsive testing.
+- [x] Browser testing.
+- [x] Performance audit.
+- [x] Security review.
+- [x] Content proofreading.
 
 ## Phase 6 — Deployment
 
@@ -82,7 +82,3 @@ Urutan kerja disarankan. Jangan mengerjakan semua fitur sekaligus.
 - [ ] Smoke tests.
 - [ ] Monitoring/log rotation.
 - [ ] Restore test.
-
-## Suggested first AI task
-
-"Read AI_INSTRUCTIONS.md and the relevant docs. Inspect the existing repository. Do not implement the entire application yet. First report the current project state, dependency compatibility, proposed folder structure, and Phase 0/Phase 1 implementation plan. Ask before making destructive or architecture-changing decisions."

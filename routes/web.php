@@ -11,7 +11,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Models\ProfileSetting;
+use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +52,15 @@ Route::get('/locale/{locale}', function (string $locale): RedirectResponse {
 
 // Fallback login named route for standard auth middleware
 Route::get('/login', fn (): RedirectResponse => redirect()->route('admin.login'))->name('login');
+
+// Dynamic XML Sitemap for Search Engines
+Route::get('/sitemap.xml', function (): Response {
+    $projects = Project::published()->orderBy('updated_at', 'desc')->get();
+
+    return response()->view('sitemap', [
+        'projects' => $projects,
+    ])->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 // Admin Panel CMS Routes
 Route::prefix('admin')->name('admin.')->group(function () {
