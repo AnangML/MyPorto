@@ -33,13 +33,45 @@
         }
     </script>
 </head>
-<body class="bg-slate-50 dark:bg-[#0A0F1D] text-slate-800 dark:text-slate-200 font-sans antialiased min-h-screen flex flex-col md:flex-row transition-colors duration-200">
+<body class="bg-slate-50 dark:bg-[#0A0F1D] text-slate-800 dark:text-slate-200 font-sans antialiased min-h-screen flex flex-col md:flex-row transition-colors duration-200" x-data="{ mobileMenuOpen: false }">
 
-    <!-- Admin Sidebar Navigation -->
-    <aside class="w-full md:w-64 bg-white dark:bg-[#1E293B] border-r border-slate-200/90 dark:border-slate-800 shrink-0 flex flex-col justify-between p-5 z-20">
+    <!-- Mobile Topbar Header (visible only on screens < md) -->
+    <div class="md:hidden bg-white dark:bg-[#1E293B] border-b border-slate-200/90 dark:border-slate-800 p-4 flex items-center justify-between sticky top-0 z-40">
+        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
+                A
+            </span>
+            <span class="font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC]">
+                Admin CMS
+            </span>
+        </a>
+
+        <div class="flex items-center gap-2">
+            <button onclick="toggleTheme()" type="button" aria-label="Toggle Theme" class="p-2 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <svg class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+
+            <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" aria-label="Toggle Navigation" class="p-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Admin Sidebar Navigation (Locked width & pinned viewport height on desktop) -->
+    <aside 
+        :class="mobileMenuOpen ? 'flex' : 'hidden md:flex'"
+        class="w-full md:w-64 md:min-w-[16rem] md:max-w-[16rem] md:flex-none md:sticky md:top-0 md:h-screen md:overflow-y-auto bg-white dark:bg-[#1E293B] border-r border-slate-200/90 dark:border-slate-800 flex-col justify-between p-5 z-30 transition-all duration-200 shadow-sm md:shadow-none">
+        
         <div>
-            <!-- Monogram Brand Header -->
-            <div class="flex items-center justify-between pb-6 mb-6 border-b border-slate-100 dark:border-slate-800">
+            <!-- Monogram Brand Header (Desktop) -->
+            <div class="hidden md:flex items-center justify-between pb-6 mb-6 border-b border-slate-100 dark:border-slate-800">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 group">
                     <span class="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold text-sm flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
                         A
@@ -90,7 +122,7 @@
 
                 <a href="{{ route('admin.skills.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 {{ request()->routeIs('admin.skills.*') ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-500/25' : 'text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60' }}">
                     <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
                     </svg>
                     <span>Skills Matrix</span>
                 </a>
@@ -155,7 +187,7 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col min-w-0">
+    <main class="flex-1 min-w-0 flex flex-col overflow-x-hidden">
         <!-- Top Flash Alerts -->
         <div class="px-6 pt-6">
             @if(session('success'))
@@ -193,4 +225,3 @@
 
 </body>
 </html>
-
