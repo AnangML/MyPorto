@@ -8,6 +8,7 @@ use App\Models\Experience;
 use App\Models\ProfileSetting;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Models\Training;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -23,6 +24,7 @@ class DashboardController extends Controller
             'featured_projects' => Project::where('is_featured', true)->count(),
             'total_skills' => Skill::count(),
             'total_experiences' => Experience::count(),
+            'total_trainings' => Training::count(),
             'total_messages' => ContactMessage::count(),
             'unread_messages' => ContactMessage::unread()->count(),
         ];

@@ -70,14 +70,14 @@
             </div>
         </div>
 
-        <!-- Right Column: Clean Monochrome Portrait with Soft Blue Edge Aura -->
+        <!-- Right Column: Clean Monochrome Portrait with Radiant Blue Edge Aura -->
         <div class="lg:col-span-5 relative flex justify-center lg:justify-end reveal-on-scroll">
             
-            <!-- Radiant Soft Blue & Sky Aura on the Right Edge of the Photo -->
-            <div class="pointer-events-none absolute -right-8 -top-4 w-[420px] h-[480px] bg-gradient-to-bl from-blue-400/35 via-sky-300/30 to-blue-200/10 dark:from-blue-600/30 dark:via-sky-500/20 dark:to-transparent rounded-full blur-3xl -z-10"></div>
-            <div class="pointer-events-none absolute right-0 top-12 w-80 h-96 bg-blue-300/30 dark:bg-sky-400/20 rounded-full blur-2xl -z-10"></div>
+            <!-- Radiant Soft Blue & Sky Aura on the Right Edge of the Photo (z-0 so it's visibly glowing around the frame) -->
+            <div class="pointer-events-none absolute -right-6 -top-6 w-[420px] h-[500px] bg-gradient-to-bl from-blue-500/30 via-sky-400/25 to-blue-300/10 dark:from-blue-500/40 dark:via-sky-400/30 dark:to-transparent rounded-full blur-3xl z-0"></div>
+            <div class="pointer-events-none absolute right-4 top-8 w-80 h-96 bg-blue-400/25 dark:bg-sky-400/25 rounded-full blur-2xl z-0"></div>
 
-            <div class="relative w-full max-w-sm sm:max-w-md lg:max-w-none aspect-[4/5] sm:aspect-[3/4] rounded-2xl overflow-hidden flex items-end justify-center">
+            <div class="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-none aspect-[4/5] sm:aspect-[3/4] rounded-2xl overflow-hidden flex items-end justify-center shadow-[0_0_40px_rgba(37,99,235,0.15)] dark:shadow-[0_0_50px_rgba(56,189,248,0.2)]">
                 
                 <!-- Portrait Image with Blue Edge Aura -->
                 <img 

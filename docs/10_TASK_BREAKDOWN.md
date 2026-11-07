@@ -53,6 +53,7 @@ Urutan kerja disarankan. Jangan mengerjakan semua fitur sekaligus.
 - [x] GitHub links/manual metadata.
 - [x] Optional GitHub API integration.
 - [x] SEO metadata dan sitemap.
+- [x] Modul CMS Seminar & Pelatihan IT (11 Sub Kejuruan Bilingual & Cascading Wilayah Indonesia 38 Provinsi Kemendagri/BPS).
 - [x] Visitor analytics first-party.
 - [x] Email notification opsional.
 - [x] Empty/loading/error states.

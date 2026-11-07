@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
@@ -86,6 +87,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Experiences Resource
         Route::resource('experiences', ExperienceController::class)->except(['show']);
+
+        // Trainings & Seminars Resource
+        Route::resource('trainings', TrainingController::class)->except(['show']);
 
         // Contact Messages Inbox
         Route::get('/messages', [ContactMessageController::class, 'index'])->name('messages.index');

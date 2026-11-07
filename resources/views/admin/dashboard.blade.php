@@ -14,6 +14,13 @@
 
             <!-- Quick Action Buttons -->
             <div class="flex items-center gap-3">
+                <a href="{{ route('admin.trainings.create') }}" class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-sm hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Input Seminar</span>
+                </a>
+
                 <a href="{{ route('admin.projects.create') }}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-sm shadow-blue-500/20 hover:-translate-y-0.5 active:translate-y-0 transition-all">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -28,7 +35,7 @@
         </div>
 
         <!-- Metric Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             <!-- Card 1: Projects -->
             <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs">
                 <div class="flex items-center justify-between">
@@ -85,6 +92,27 @@
                     </span>
                     <a href="{{ route('admin.experiences.index') }}" class="text-xs text-blue-600 dark:text-sky-400 hover:underline">
                         Timeline &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4: Seminar & Pelatihan -->
+            <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Seminar/Pelatihan</span>
+                    <span class="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="mt-4 flex items-baseline justify-between">
+                    <span class="text-3xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                        {{ $stats['total_trainings'] }}
+                    </span>
+                    <a href="{{ route('admin.trainings.index') }}" class="text-xs text-blue-600 dark:text-sky-400 hover:underline">
+                        Kelola &rarr;
                     </a>
                 </div>
             </div>
