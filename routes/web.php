@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
@@ -16,7 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Project Detail / Case Study
 Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
 
-// Contact Form Submission (Protected by Rate Limiter)
+// Contact Form Submission (Protected by Rate Limiter & Honeypot)
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('contact.store');
@@ -40,3 +47,39 @@ Route::get('/locale/{locale}', function (string $locale): RedirectResponse {
 
     return redirect()->back();
 })->name('locale.switch');
+
+// Fallback login named route for standard auth middleware
+Route::get('/login', fn (): RedirectResponse => redirect()->route('admin.login'))->name('login');
+
+// Admin Panel CMS Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])
+        ->middleware('throttle:5,1')
+        ->name('login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    // Protected Admin Routes
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Profile Settings
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+        // Projects Resource
+        Route::resource('projects', AdminProjectController::class)->except(['show']);
+
+        // Skills Resource
+        Route::resource('skills', SkillController::class)->except(['show']);
+
+        // Experiences Resource
+        Route::resource('experiences', ExperienceController::class)->except(['show']);
+
+        // Contact Messages Inbox
+        Route::get('/messages', [ContactMessageController::class, 'index'])->name('messages.index');
+        Route::get('/messages/{message}', [ContactMessageController::class, 'show'])->name('messages.show');
+        Route::patch('/messages/{message}/status', [ContactMessageController::class, 'updateStatus'])->name('messages.status');
+        Route::delete('/messages/{message}', [ContactMessageController::class, 'destroy'])->name('messages.destroy');
+    });
+});
