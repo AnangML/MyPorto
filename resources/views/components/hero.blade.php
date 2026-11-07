@@ -1,6 +1,6 @@
 @props(['profile' => null])
 
-<section class="px-2 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-12 lg:pb-20 relative overflow-hidden">
+<section id="home" class="px-2 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-12 lg:pb-20 relative overflow-hidden">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
         
         <!-- Left Column: Copy & CTAs -->

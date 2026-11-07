@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Models\ProfileSetting;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\Skill;
 use Illuminate\Contracts\View\View;
 
@@ -33,6 +34,8 @@ class HomeController extends Controller
             ->visible()
             ->get();
 
-        return view('home', compact('profile', 'projects', 'skills', 'experiences'));
+        $categories = ProjectCategory::orderBy('sort_order', 'asc')->get();
+
+        return view('home', compact('profile', 'categories', 'projects', 'skills', 'experiences'));
     }
 }
