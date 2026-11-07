@@ -207,7 +207,7 @@ class Training extends Model
     public function getCertificateUrlResolvedAttribute(): ?string
     {
         if ($this->certificate_file_path && Storage::disk('public')->exists($this->certificate_file_path)) {
-            return Storage::disk('public')->url($this->certificate_file_path);
+            return asset('storage/'.$this->certificate_file_path);
         }
 
         return $this->certificate_url;

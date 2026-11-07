@@ -40,12 +40,34 @@ class ProfileController extends Controller
             'github_url' => ['nullable', 'url', 'max:255'],
             'linkedin_url' => ['nullable', 'url', 'max:255'],
             'availability_status' => ['nullable', 'boolean'],
+            'profile_photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'remove_profile_photo' => ['nullable', 'boolean'],
             'cv_file' => ['nullable', 'file', 'mimes:pdf', 'max:5120'],
         ]);
 
         $profile = ProfileSetting::firstOrNew(['id' => 1]);
 
         $validated['availability_status'] = $request->boolean('availability_status');
+
+        // Handle profile photo removal
+        if ($request->boolean('remove_profile_photo')) {
+            if ($profile->profile_photo_path && Storage::disk('public')->exists($profile->profile_photo_path)) {
+                Storage::disk('public')->delete($profile->profile_photo_path);
+            }
+            $validated['profile_photo_path'] = null;
+        }
+        unset($validated['remove_profile_photo']);
+
+        // Handle profile photo upload
+        if ($request->hasFile('profile_photo')) {
+            if ($profile->profile_photo_path && Storage::disk('public')->exists($profile->profile_photo_path)) {
+                Storage::disk('public')->delete($profile->profile_photo_path);
+            }
+
+            $path = $request->file('profile_photo')->store('profile', 'public');
+            $validated['profile_photo_path'] = $path;
+        }
+        unset($validated['profile_photo']);
 
         if ($request->hasFile('cv_file')) {
             if ($profile->cv_file_path && Storage::disk('public')->exists($profile->cv_file_path)) {

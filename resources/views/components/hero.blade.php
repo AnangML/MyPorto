@@ -81,8 +81,8 @@
                 
                 <!-- Portrait Image with Blue Edge Aura -->
                 <img 
-                    src="{{ asset('images/portrait.jpg') }}" 
-                    alt="Anang Muhamad Lutfi - Portrait" 
+                    src="{{ $profile?->profile_photo_url ?? asset('images/portrait.jpg') }}" 
+                    alt="{{ $profile?->display_name ?? 'Anang Muhamad Lutfi' }} - Portrait" 
                     class="w-full h-full object-cover object-top contrast-[1.04] transition-all duration-700 fade-bottom-mask"
                     loading="eager"
                 />

@@ -4,11 +4,14 @@ namespace Tests\Feature;
 
 use App\Models\ContactMessage;
 use App\Models\Experience;
+use App\Models\ProfileSetting;
 use App\Models\Project;
 use App\Models\Skill;
 use App\Models\User;
 use Database\Seeders\PortfolioSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AdminPanelTest extends TestCase
@@ -95,6 +98,73 @@ class AdminPanelTest extends TestCase
             'display_name' => 'Anang Muhamad Lutfi, S.Kom.',
             'email_public' => 'anang.updated@example.com',
         ]);
+    }
+
+    public function test_admin_can_upload_and_change_profile_photo(): void
+    {
+        Storage::fake('public');
+
+        $fakePhoto = UploadedFile::fake()->image('avatar-anang.jpg', 600, 800);
+
+        $response = $this->actingAs($this->admin)->put('/admin/profile', [
+            'display_name' => 'Anang Muhamad Lutfi',
+            'headline_id' => 'Backend Engineer',
+            'headline_en' => 'Backend Engineer',
+            'bio_id' => 'Bio profil',
+            'bio_en' => 'Profile bio',
+            'profile_photo' => $fakePhoto,
+        ]);
+
+        $response->assertRedirect('/admin/profile');
+        $response->assertSessionHas('success');
+
+        $profile = ProfileSetting::firstOrFail();
+        $this->assertNotNull($profile->profile_photo_path);
+        Storage::disk('public')->assertExists($profile->profile_photo_path);
+        $this->assertStringContainsString('/storage/profile/', $profile->profile_photo_url);
+    }
+
+    public function test_admin_can_remove_custom_profile_photo(): void
+    {
+        Storage::fake('public');
+
+        $profile = ProfileSetting::firstOrFail();
+        $fakePath = 'profile/test-photo.jpg';
+        Storage::disk('public')->put($fakePath, 'photo-content');
+        $profile->update(['profile_photo_path' => $fakePath]);
+
+        $response = $this->actingAs($this->admin)->put('/admin/profile', [
+            'display_name' => 'Anang Muhamad Lutfi',
+            'headline_id' => 'Backend Engineer',
+            'headline_en' => 'Backend Engineer',
+            'bio_id' => 'Bio profil',
+            'bio_en' => 'Profile bio',
+            'remove_profile_photo' => '1',
+        ]);
+
+        $response->assertRedirect('/admin/profile');
+        $profile->refresh();
+        $this->assertNull($profile->profile_photo_path);
+        Storage::disk('public')->assertMissing($fakePath);
+        $this->assertStringContainsString('images/portrait.jpg', $profile->profile_photo_url);
+    }
+
+    public function test_admin_cannot_upload_invalid_profile_photo_format(): void
+    {
+        Storage::fake('public');
+
+        $invalidFile = UploadedFile::fake()->create('malicious.php', 100, 'text/plain');
+
+        $response = $this->actingAs($this->admin)->put('/admin/profile', [
+            'display_name' => 'Anang Muhamad Lutfi',
+            'headline_id' => 'Backend Engineer',
+            'headline_en' => 'Backend Engineer',
+            'bio_id' => 'Bio profil',
+            'bio_en' => 'Profile bio',
+            'profile_photo' => $invalidFile,
+        ]);
+
+        $response->assertSessionHasErrors('profile_photo');
     }
 
     public function test_admin_can_create_update_and_delete_project(): void

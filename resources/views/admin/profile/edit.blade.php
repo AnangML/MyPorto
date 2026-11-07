@@ -25,6 +25,100 @@
             @csrf
             @method('PUT')
 
+            <!-- Profile Photo & Portrait Hero Card -->
+            <div 
+                x-data="{
+                    photoPreview: null,
+                    previewPhoto(event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                this.photoPreview = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }"
+                class="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-4"
+            >
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                    <div>
+                        <h2 class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                            Foto Profil &amp; Potret Hero
+                        </h2>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                            Foto utama yang tampil di bagian Hero beranda publik portofolio dan avatar CMS.
+                        </p>
+                    </div>
+
+                    @if($profile->profile_photo_path)
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/60">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                            Foto Kustom Aktif
+                        </span>
+                    @else
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                            Foto Default Aktif
+                        </span>
+                    @endif
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 pt-2">
+                    <!-- Photo Preview Box -->
+                    <div class="relative shrink-0">
+                        <div class="w-28 h-36 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 shadow-sm bg-slate-100 dark:bg-slate-900 flex items-center justify-center group relative">
+                            <!-- Show live preview if selected, else current photo -->
+                            <template x-if="photoPreview">
+                                <img :src="photoPreview" alt="Preview Foto Baru" class="w-full h-full object-cover object-top">
+                            </template>
+                            <template x-if="!photoPreview">
+                                <img src="{{ $profile->profile_photo_url }}" alt="Foto Profil" class="w-full h-full object-cover object-top">
+                            </template>
+                        </div>
+                        <span x-show="photoPreview" class="absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-[9px] font-bold bg-blue-600 text-white shadow-xs">
+                            Preview Baru
+                        </span>
+                    </div>
+
+                    <!-- Upload Controls & Guidelines -->
+                    <div class="flex-1 space-y-3 w-full">
+                        <div>
+                            <label for="profile_photo" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                                Unggah Foto Baru (JPG, JPEG, PNG, WEBP — Maksimal 5MB)
+                            </label>
+                            <input 
+                                type="file" 
+                                id="profile_photo" 
+                                name="profile_photo" 
+                                accept="image/jpeg,image/png,image/webp,image/jpg"
+                                @change="previewPhoto($event)"
+                                class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-blue-950/60 dark:file:text-blue-300 cursor-pointer"
+                            />
+                            @error('profile_photo')
+                                <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <p class="text-[11px] text-slate-400 leading-relaxed">
+                            💡 <strong>Saran tampilan terbaik</strong>: Gunakan foto portrait dengan rasio 3:4 atau 4:5 dan pencahayaan kontras tajam agar menyatu sempurna dengan efek pendaran biru di Hero portofolio.
+                        </p>
+
+                        @if($profile->profile_photo_path)
+                            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                                <span class="text-[11px] text-slate-400 font-mono truncate max-w-xs">
+                                    {{ $profile->profile_photo_path }}
+                                </span>
+                                <label class="flex items-center gap-2 text-xs text-red-600 dark:text-red-400 font-medium cursor-pointer hover:underline">
+                                    <input type="checkbox" name="remove_profile_photo" value="1" class="rounded border-slate-300 text-red-600 focus:ring-red-500">
+                                    <span>Hapus foto &amp; gunakan foto default</span>
+                                </label>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
             <!-- General Card -->
             <div class="p-6 rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-4">
                 <h2 class="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC] pb-3 border-b border-slate-100 dark:border-slate-800">

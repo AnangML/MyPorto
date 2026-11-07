@@ -172,15 +172,25 @@
                 <span>Lihat Portofolio Live</span>
             </a>
 
+            @php
+                $adminProfile = \App\Models\ProfileSetting::current();
+            @endphp
             <!-- User Info & Logout Form -->
-            <div class="p-3 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 flex items-center justify-between">
-                <div class="truncate mr-2">
-                    <span class="font-semibold text-slate-800 dark:text-slate-200 block truncate">
-                        {{ auth()->user()?->name ?? 'Admin' }}
-                    </span>
-                    <span class="text-[10px] text-slate-400 block truncate">
-                        {{ auth()->user()?->email }}
-                    </span>
+            <div class="p-2.5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 flex items-center justify-between">
+                <div class="flex items-center gap-2.5 truncate mr-2">
+                    <img 
+                        src="{{ $adminProfile?->profile_photo_url ?? asset('images/portrait.jpg') }}" 
+                        alt="Avatar" 
+                        class="w-8 h-8 rounded-xl object-cover object-top border border-slate-200 dark:border-slate-700 shrink-0"
+                    />
+                    <div class="truncate">
+                        <span class="font-semibold text-slate-800 dark:text-slate-200 block truncate text-[11px] leading-tight">
+                            {{ auth()->user()?->name ?? 'Admin' }}
+                        </span>
+                        <span class="text-[10px] text-slate-400 block truncate font-mono">
+                            {{ auth()->user()?->email }}
+                        </span>
+                    </div>
                 </div>
 
                 <form method="POST" action="{{ route('admin.logout') }}">

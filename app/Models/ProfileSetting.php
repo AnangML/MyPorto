@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileSetting extends Model
 {
@@ -58,6 +59,18 @@ class ProfileSetting extends Model
         $locale = App::getLocale();
 
         return $this->{"seo_description_{$locale}"} ?? $this->seo_description_en ?? $this->seo_description_id;
+    }
+
+    /**
+     * Resolve the public URL of the profile/hero photo with default fallback.
+     */
+    public function getProfilePhotoUrlAttribute(): string
+    {
+        if ($this->profile_photo_path && Storage::disk('public')->exists($this->profile_photo_path)) {
+            return asset('storage/'.$this->profile_photo_path);
+        }
+
+        return asset('images/portrait.jpg');
     }
 
     /**
