@@ -13,9 +13,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
-    <!-- Theme Initialization (Prevent FOUC) -->
+    <!-- Theme Initialization: Default to pure white (Light Mode) -->
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // Clean up legacy auto-dark key
+        localStorage.removeItem('theme');
+        if (localStorage.getItem('user_theme') === 'dark') {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
@@ -30,8 +32,8 @@
         }
         
         .fade-bottom-mask {
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%);
         }
 
         .reveal-on-scroll {
@@ -54,17 +56,17 @@
         }
     </style>
 </head>
-<body class="bg-[#FFF1ED] dark:bg-[#141312] min-h-screen text-[#171717] dark:text-[#F5F1EE] p-3 sm:p-5 lg:p-8 font-sans antialiased selection:bg-[#E69A86]/30 selection:text-[#B96F5D] transition-colors duration-300">
+<body class="bg-white dark:bg-[#0A0F1D] min-h-screen text-[#0F172A] dark:text-[#F8FAFC] font-sans antialiased selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300 transition-colors duration-300">
     
-    <!-- Floating Main Editorial Canvas -->
-    <div class="max-w-[1340px] mx-auto bg-[#FAF9F7] dark:bg-[#1C1B1A] rounded-[28px] sm:rounded-[36px] border border-[#E7E2DF] dark:border-[#2D2A27] shadow-[0_4px_30px_rgba(0,0,0,0.03)] dark:shadow-none min-h-[94vh] flex flex-col justify-between overflow-hidden relative">
+    <!-- Full Width Seamless White Container -->
+    <div class="max-w-[1300px] mx-auto min-h-screen flex flex-col justify-between relative px-4 sm:px-8 lg:px-12 bg-white dark:bg-[#0A0F1D]">
         
-        <!-- Ambient Peach/Coral Glow -->
-        <div class="pointer-events-none absolute -top-40 -right-40 w-96 h-96 bg-[#FBD5CB]/40 dark:bg-[#3D2520]/25 rounded-full blur-3xl"></div>
-        <div class="pointer-events-none absolute top-1/2 -left-40 w-80 h-80 bg-[#FFF1ED]/60 dark:bg-[#251F1D]/40 rounded-full blur-3xl"></div>
+        <!-- Ambient Subtle Sky Glow Behind Hero -->
+        <div class="pointer-events-none absolute -top-32 -right-32 w-96 h-96 bg-blue-50/70 dark:bg-blue-900/15 rounded-full blur-3xl -z-10"></div>
+        <div class="pointer-events-none absolute top-1/3 -left-32 w-80 h-80 bg-sky-50/50 dark:bg-sky-950/20 rounded-full blur-3xl -z-10"></div>
 
         <div>
-            <!-- Top Navigation Bar -->
+            <!-- Top Centered Navigation Bar -->
             <x-navbar />
 
             <!-- Page Content -->
@@ -74,23 +76,23 @@
         </div>
 
         <!-- Footer -->
-        <footer class="mt-20 border-t border-[#E7E2DF]/60 dark:border-[#2D2A27] px-6 sm:px-12 py-8 text-xs text-[#737373] dark:text-[#B9B1AC] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <footer class="mt-24 border-t border-slate-100 dark:border-slate-800/80 py-8 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 <span>Anang Muhamad Lutfi &copy; {{ date('Y') }}. {{ __('portfolio.common.all_rights_reserved') }}</span>
             </div>
             
             <div class="flex items-center gap-6">
-                <a href="https://github.com/AnangML" target="_blank" rel="noopener noreferrer" class="hover:text-[#171717] dark:hover:text-[#FAF9F7] transition-colors">
+                <a href="https://github.com/AnangML" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     GitHub
                 </a>
-                <a href="#about" class="hover:text-[#171717] dark:hover:text-[#FAF9F7] transition-colors">
+                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.about') }}
                 </a>
-                <a href="#work" class="hover:text-[#171717] dark:hover:text-[#FAF9F7] transition-colors">
+                <a href="#work" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.work') }}
                 </a>
-                <a href="#contact" class="hover:text-[#171717] dark:hover:text-[#FAF9F7] transition-colors">
+                <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.contact') }}
                 </a>
             </div>
@@ -117,9 +119,8 @@
 
         function toggleTheme() {
             const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('user_theme', isDark ? 'dark' : 'light');
         }
     </script>
 </body>
 </html>
-

@@ -56,7 +56,7 @@ Dokumentasi perencanaan untuk membangun personal portfolio **Anang Muhamad Lutfi
 - Arsitektur: dynamic website.
 - Admin: full CMS.
 - Halaman publik: Home, About, Projects, Skills, Experience, Contact, Certificates, Blog.
-- Desain: mengikuti referensi peach/ivory, portrait monochrome, editorial typography, dan pill navigation.
+- Desain: mengikuti referensi putih-biru (pure white canvas & vibrant blue accent), portrait monochrome, editorial typography, dan pill navigation.
 - Foto: foto profesional asli dari pemilik.
 - Bahasa: Indonesia dan Inggris.
 - Animasi: lembut, singkat, tidak mengganggu aksesibilitas.

@@ -3,27 +3,32 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Enable class-based dark mode instead of automatic OS media query */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     --font-serif-accent: 'Instrument Serif', Georgia, serif;
 
-    --color-peach-50: #FFF1ED;
-    --color-peach-100: #FDE8E2;
-    --color-peach-200: #FBD5CB;
-    --color-ivory: #FAF9F7;
-    --color-ink: #171717;
-    --color-muted: #737373;
-    --color-border-warm: #E7E2DF;
-    --color-accent-coral: #E69A86;
-    --color-accent-dark: #B96F5D;
+    /* Light Theme (Pure White & Vibrant Blue) */
+    --color-canvas: #FFFFFF;
+    --color-text-main: #0F172A;
+    --color-text-muted: #64748B;
+    --color-border-subtle: #E2E8F0;
+    
+    --color-brand-blue: #2563EB;
+    --color-brand-blue-dark: #1D4ED8;
+    --color-brand-blue-light: #EFF6FF;
+    --color-brand-blue-border: #BFDBFE;
 
-    /* Dark mode color palette */
-    --color-dark-bg: #141312;
-    --color-dark-canvas: #1C1B1A;
-    --color-dark-surface: #252321;
-    --color-dark-border: #35322F;
-    --color-dark-text: #F5F1EE;
-    --color-dark-muted: #B9B1AC;
+    /* Dark Mode Theme */
+    --color-dark-bg: #0A0F1D;
+    --color-dark-canvas: #0F172A;
+    --color-dark-surface: #1E293B;
+    --color-dark-border: #1E293B;
+    --color-dark-text: #F8FAFC;
+    --color-dark-muted: #94A3B8;
+    --color-dark-accent: #38BDF8;
 }
 
 @utility font-serif-accent {
@@ -33,6 +38,11 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        background-color: #FFFFFF;
+    }
+
+    html.dark {
+        background-color: #0A0F1D;
     }
 
     @media (prefers-reduced-motion: reduce) {

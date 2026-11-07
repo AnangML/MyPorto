@@ -2,35 +2,33 @@
 
 ## Design direction
 
-Editorial, warm, minimal, premium, personal. Ambil karakter dari referensi: bidang putih/ivory di atas latar peach lembut, navigasi pill, portrait monochrome besar, headline oversized, dan aksen serif italic.
+Editorial, modern, minimal, premium, tech-focused. Mengikuti karakter dari gambar referensi: kanvas putih bersih (pure white), navigasi pill terpusat (frosted glass), portrait monochrome dengan smooth bottom fade, headline oversized, dan aksen kata serif italic dengan sentuhan warna biru elektrik (tech royal blue).
 
 Jangan menyalin foto atau identitas visual pemilik referensi. Gunakan foto profesional milik Anang.
 
-## Color tokens (starting point)
+## Color tokens (White & Blue Theme)
 
 | Token | Hex | Usage |
 |---|---|---|
-| Peach 50 | `#FFF1ED` | Outer background |
-| Peach 100 | `#FBE5DF` | Soft accent |
-| Ivory | `#FAF9F7` | Main canvas |
-| White | `#FFFFFF` | Cards/surfaces |
-| Ink | `#171717` | Primary text |
-| Muted | `#737373` | Secondary text |
-| Border | `#E7E2DF` | Borders |
-| Accent | `#E69A86` | Editorial highlight |
-| Accent dark | `#B96F5D` | Accent text where contrast is sufficient |
+| Background Canvas | `#FFFFFF` | Latar utama (Pure White) |
+| Blue 50 | `#EFF6FF` | Soft blue badge & highlight background |
+| Blue 200 | `#BFDBFE` | Subtle blue border |
+| Brand Blue (Primary) | `#2563EB` | Aksen tombol utama, aksen serif italic, link aktif |
+| Blue Dark | `#1D4ED8` | Hover state tombol utama |
+| Text Main | `#0F172A` | Teks judul & konten utama (Slate 900) |
+| Text Muted | `#64748B` | Teks sekunder, deskripsi & caption (Slate 500) |
+| Border | `#E2E8F0` | Garis batas tipis & divider (Slate 200) |
 
-Pastikan contrast WCAG; jangan gunakan peach pucat untuk teks kecil.
+Pastikan contrast WCAG; gunakan teks kontras tinggi untuk kenyamanan membaca.
 
 ## Dark mode
 
-Dark mode bukan sekadar invert. Gunakan:
-- Outer background: deep warm charcoal.
-- Canvas: `#1C1B1A`.
-- Surface: `#252321`.
-- Text: `#F5F1EE`.
-- Muted text: `#B9B1AC`.
-- Accent: peach yang sedikit lebih terang.
+Dark mode dirancang bernuansa deep midnight tech:
+- Background utama: `#0A0F1D` (Deep Midnight Charcoal)
+- Surface / Cards: `#1E293B` (Slate 800)
+- Text utama: `#F8FAFC` (Slate 50)
+- Muted text: `#94A3B8` (Slate 400)
+- Accent: `#38BDF8` / `#60A5FA` (Electric Sky Blue)
 
 Simpan preferensi theme di localStorage dan hormati `prefers-color-scheme` pada kunjungan pertama.
 
