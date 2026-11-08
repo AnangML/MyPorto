@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Experience;
+use App\Services\IndonesiaRegionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ExperienceController extends Controller
@@ -27,7 +29,11 @@ class ExperienceController extends Controller
      */
     public function create(): View
     {
-        return view('admin.experiences.create');
+        $locationTypes = Experience::LOCATION_TYPES;
+        $provinces = IndonesiaRegionService::getProvinces();
+        $regions = IndonesiaRegionService::getRegions();
+
+        return view('admin.experiences.create', compact('locationTypes', 'provinces', 'regions'));
     }
 
     /**
@@ -42,6 +48,10 @@ class ExperienceController extends Controller
             'description_id' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
             'location' => ['nullable', 'string', 'max:255'],
+            'location_type' => ['nullable', 'string', Rule::in(array_keys(Experience::LOCATION_TYPES))],
+            'province' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'venue_or_platform' => ['nullable', 'string', 'max:255'],
             'employment_type' => ['nullable', 'string', 'max:255'],
             'started_at' => ['required', 'date'],
             'ended_at' => ['nullable', 'date'],
@@ -50,9 +60,17 @@ class ExperienceController extends Controller
             'sort_order' => ['nullable', 'integer'],
         ]);
 
+        $validated['location_type'] = $validated['location_type'] ?? 'offline';
         $validated['is_current'] = $request->boolean('is_current');
         $validated['is_visible'] = $request->boolean('is_visible', true);
         $validated['sort_order'] = $validated['sort_order'] ?? 0;
+
+        if ($validated['location_type'] === 'online') {
+            $validated['province'] = null;
+            $validated['city'] = null;
+        } elseif ($validated['location_type'] === 'international') {
+            $validated['province'] = null;
+        }
 
         if ($validated['is_current']) {
             $validated['ended_at'] = null;
@@ -68,7 +86,11 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience): View
     {
-        return view('admin.experiences.edit', compact('experience'));
+        $locationTypes = Experience::LOCATION_TYPES;
+        $provinces = IndonesiaRegionService::getProvinces();
+        $regions = IndonesiaRegionService::getRegions();
+
+        return view('admin.experiences.edit', compact('experience', 'locationTypes', 'provinces', 'regions'));
     }
 
     /**
@@ -83,6 +105,10 @@ class ExperienceController extends Controller
             'description_id' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
             'location' => ['nullable', 'string', 'max:255'],
+            'location_type' => ['nullable', 'string', Rule::in(array_keys(Experience::LOCATION_TYPES))],
+            'province' => ['nullable', 'string', 'max:255'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'venue_or_platform' => ['nullable', 'string', 'max:255'],
             'employment_type' => ['nullable', 'string', 'max:255'],
             'started_at' => ['required', 'date'],
             'ended_at' => ['nullable', 'date'],
@@ -91,9 +117,17 @@ class ExperienceController extends Controller
             'sort_order' => ['nullable', 'integer'],
         ]);
 
+        $validated['location_type'] = $validated['location_type'] ?? 'offline';
         $validated['is_current'] = $request->boolean('is_current');
         $validated['is_visible'] = $request->boolean('is_visible');
         $validated['sort_order'] = $validated['sort_order'] ?? 0;
+
+        if ($validated['location_type'] === 'online') {
+            $validated['province'] = null;
+            $validated['city'] = null;
+        } elseif ($validated['location_type'] === 'international') {
+            $validated['province'] = null;
+        }
 
         if ($validated['is_current']) {
             $validated['ended_at'] = null;

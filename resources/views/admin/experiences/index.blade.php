@@ -44,7 +44,14 @@
                                 </td>
                                 <td class="p-4 text-slate-600 dark:text-slate-300">
                                     <span class="block">{{ $exp->employment_type ?? 'Career' }}</span>
-                                    <span class="text-slate-400 text-[11px] block">{{ $exp->location ?? 'Indonesia' }}</span>
+                                    <span class="text-slate-400 text-[11px] flex items-center gap-1.5 mt-0.5">
+                                        @if($exp->location_type === 'online')
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                                        @elseif($exp->location_type === 'international')
+                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
+                                        @endif
+                                        <span>{{ $exp->location_display }}</span>
+                                    </span>
                                 </td>
                                 <td class="p-4 font-mono text-[11px] text-blue-600 dark:text-sky-400 font-semibold">
                                     {{ $exp->started_at->format('M Y') }} — {{ $exp->is_current ? 'Sekarang (Aktif)' : ($exp->ended_at ? $exp->ended_at->format('M Y') : '—') }}

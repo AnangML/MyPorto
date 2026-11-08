@@ -5,6 +5,7 @@ return [
         'home' => 'Beranda',
         'about' => 'Tentang',
         'work' => 'Karya',
+        'credentials' => 'Sertifikasi',
         'blog' => 'Artikel',
         'contact' => 'Kontak',
     ],
@@ -18,6 +19,7 @@ return [
         'bio' => 'Halo, saya Anang — seorang Backend & Web Developer yang berfokus merancang aplikasi web handal, RESTful API yang kokoh, dan arsitektur skalabel untuk memecahkan masalah nyata.',
         'cta_work' => 'Lihat Proyek Saya',
         'cta_talk' => 'Hubungi Saya',
+        'download_cv' => 'Unduh CV',
     ],
     'contact' => [
         'badge' => 'Hubungi Saya',
@@ -49,6 +51,15 @@ return [
         'role' => 'Peran & Tanggung Jawab',
         'timeline' => 'Waktu Pengerjaan',
         'overview' => 'Ringkasan Proyek',
+    ],
+    'credentials' => [
+        'badge' => 'Kredensial Terverifikasi',
+        'title' => 'Seminar, Pelatihan & Sertifikasi',
+        'subtitle' => 'Rekam jejak sertifikasi keahlian IT, seminar vokasi, dan pengembangan kompetensi profesional terverifikasi.',
+        'all' => 'Semua Kegiatan',
+        'view_credential' => 'Lihat Bukti Sertifikat',
+        'verified' => 'Kompetensi Terverifikasi',
+        'empty' => 'Belum ada rekam jejak pelatihan yang ditampilkan.',
     ],
     'common' => [
         'language' => 'Bahasa',

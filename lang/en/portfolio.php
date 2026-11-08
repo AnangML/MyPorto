@@ -5,6 +5,7 @@ return [
         'home' => 'Home',
         'about' => 'About',
         'work' => 'Work',
+        'credentials' => 'Credentials',
         'blog' => 'Blog',
         'contact' => 'Contact',
     ],
@@ -18,6 +19,7 @@ return [
         'bio' => 'Hi, I\'m Anang — a Backend & Web Developer crafting reliable web applications, robust APIs, and scalable architectures built to solve real-world problems.',
         'cta_work' => 'View My Work',
         'cta_talk' => "Let's Talk",
+        'download_cv' => 'Download CV',
     ],
     'contact' => [
         'badge' => 'Get in Touch',
@@ -49,6 +51,15 @@ return [
         'role' => 'Role & Responsibility',
         'timeline' => 'Timeline',
         'overview' => 'Project Overview',
+    ],
+    'credentials' => [
+        'badge' => 'Verified Credentials',
+        'title' => 'Trainings & Certifications',
+        'subtitle' => 'Official vocational trainings, industry certifications, and verified continuing engineering development.',
+        'all' => 'All Activities',
+        'view_credential' => 'View Certificate',
+        'verified' => 'Verified Competency',
+        'empty' => 'No training records listed yet.',
     ],
     'common' => [
         'language' => 'Language',

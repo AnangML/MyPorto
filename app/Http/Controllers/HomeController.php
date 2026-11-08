@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\Post;
 use App\Models\ProfileSetting;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Skill;
+use App\Models\Training;
 use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
@@ -20,9 +22,10 @@ class HomeController extends Controller
 
         $projects = Project::query()
             ->published()
-            ->featured()
             ->with(['categories', 'technologies'])
+            ->orderByDesc('is_featured')
             ->orderBy('sort_order', 'asc')
+            ->orderByDesc('published_at')
             ->get();
 
         $skills = Skill::query()
@@ -34,8 +37,20 @@ class HomeController extends Controller
             ->visible()
             ->get();
 
+        $trainings = Training::query()
+            ->visible()
+            ->ordered()
+            ->get();
+
         $categories = ProjectCategory::orderBy('sort_order', 'asc')->get();
 
-        return view('home', compact('profile', 'categories', 'projects', 'skills', 'experiences'));
+        $posts = Post::query()
+            ->published()
+            ->with('categories')
+            ->latest('published_at')
+            ->take(6)
+            ->get();
+
+        return view('home', compact('profile', 'categories', 'projects', 'skills', 'experiences', 'trainings', 'posts'));
     }
 }

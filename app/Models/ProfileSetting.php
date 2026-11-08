@@ -32,6 +32,64 @@ class ProfileSetting extends Model
     }
 
     /**
+     * Parse the headline into prefix, accent, and suffix for editorial typography.
+     *
+     * @return array{prefix: string, accent: string, suffix: string}
+     */
+    public function getHeadlinePartsAttribute(): array
+    {
+        $headline = trim($this->headline);
+
+        if (empty($headline)) {
+            return [
+                'prefix' => __('portfolio.hero.headline_prefix').' '.__('portfolio.hero.headline_middle'),
+                'accent' => __('portfolio.hero.headline_accent'),
+                'suffix' => '',
+            ];
+        }
+
+        // 1. Explicit accent markup using *word* or _word_
+        if (preg_match('/^(.*?)[*_]([^*_]+)[*_](.*)$/us', $headline, $matches)) {
+            return [
+                'prefix' => trim($matches[1]),
+                'accent' => trim($matches[2]),
+                'suffix' => trim($matches[3]),
+            ];
+        }
+
+        // 2. Intelligent word boundary splitting
+        $words = preg_split('/\s+/u', $headline, -1, PREG_SPLIT_NO_EMPTY);
+        $total = count($words);
+
+        if ($total <= 1) {
+            return [
+                'prefix' => $headline,
+                'accent' => '',
+                'suffix' => '',
+            ];
+        }
+
+        if ($total <= 3) {
+            $accent = array_pop($words);
+
+            return [
+                'prefix' => implode(' ', $words),
+                'accent' => $accent,
+                'suffix' => '',
+            ];
+        }
+
+        // 4+ words: accent the last 2 words
+        $accentWords = array_splice($words, -2);
+
+        return [
+            'prefix' => implode(' ', $words),
+            'accent' => implode(' ', $accentWords),
+            'suffix' => '',
+        ];
+    }
+
+    /**
      * Localized bio accessor.
      */
     public function getBioAttribute(): string

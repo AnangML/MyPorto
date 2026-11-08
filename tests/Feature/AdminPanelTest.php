@@ -4,9 +4,13 @@ namespace Tests\Feature;
 
 use App\Models\ContactMessage;
 use App\Models\Experience;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\ProfileSetting;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\Skill;
+use App\Models\Technology;
 use App\Models\User;
 use Database\Seeders\PortfolioSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -220,6 +224,147 @@ class AdminPanelTest extends TestCase
         $this->assertDatabaseMissing('projects', ['id' => $project->id]);
     }
 
+    public function test_admin_can_upload_and_manage_project_cover_image_and_screenshots(): void
+    {
+        Storage::fake('public');
+
+        $coverFile = UploadedFile::fake()->image('project-mockup.png', 1920, 1080);
+        $galleryFile = UploadedFile::fake()->image('project-dashboard.png', 1920, 1080);
+
+        // 1. Create Project with Cover and Gallery Screenshot
+        $response = $this->actingAs($this->admin)->post('/admin/projects', [
+            'title_id' => 'Platform E-Commerce Modern',
+            'title_en' => 'Modern E-Commerce Platform',
+            'slug' => 'platform-e-commerce-modern',
+            'summary_id' => 'Ringkasan platform toko daring dengan arsitektur microservices.',
+            'summary_en' => 'Summary of online store platform with microservices architecture.',
+            'description_id' => 'Deskripsi lengkap platform toko online modern dengan integrasi payment gateway.',
+            'description_en' => 'Complete description of modern e-commerce platform with payment gateway integration.',
+            'status' => 'published',
+            'cover_image' => $coverFile,
+            'screenshots' => [$galleryFile],
+        ]);
+
+        $response->assertRedirect('/admin/projects');
+
+        $project = Project::where('slug', 'platform-e-commerce-modern')->firstOrFail();
+        $this->assertNotNull($project->cover_image_path);
+        Storage::disk('public')->assertExists($project->cover_image_path);
+        $this->assertNotNull($project->cover_image_url);
+
+        $initialCoverPath = $project->cover_image_path;
+        $this->assertCount(1, $project->meta['screenshots'] ?? []);
+        $galleryPath = $project->meta['screenshots'][0];
+        Storage::disk('public')->assertExists($galleryPath);
+
+        // 2. Update with new cover image (replaces old one)
+        $newCoverFile = UploadedFile::fake()->image('updated-mockup.png', 1920, 1080);
+        $updateResponse = $this->actingAs($this->admin)->put("/admin/projects/{$project->id}", [
+            'title_id' => 'Platform E-Commerce Modern',
+            'title_en' => 'Modern E-Commerce Platform',
+            'slug' => 'platform-e-commerce-modern',
+            'summary_id' => 'Ringkasan platform toko daring.',
+            'summary_en' => 'Summary of online store platform.',
+            'description_id' => 'Deskripsi lengkap platform.',
+            'description_en' => 'Complete description.',
+            'status' => 'published',
+            'cover_image' => $newCoverFile,
+        ]);
+
+        $updateResponse->assertRedirect('/admin/projects');
+        $project->refresh();
+
+        Storage::disk('public')->assertMissing($initialCoverPath);
+        Storage::disk('public')->assertExists($project->cover_image_path);
+
+        // 3. Remove cover image and remove gallery screenshot
+        $removeResponse = $this->actingAs($this->admin)->put("/admin/projects/{$project->id}", [
+            'title_id' => 'Platform E-Commerce Modern',
+            'title_en' => 'Modern E-Commerce Platform',
+            'slug' => 'platform-e-commerce-modern',
+            'summary_id' => 'Ringkasan platform toko daring.',
+            'summary_en' => 'Summary of online store platform.',
+            'description_id' => 'Deskripsi lengkap platform.',
+            'description_en' => 'Complete description.',
+            'status' => 'published',
+            'remove_cover_image' => '1',
+            'remove_screenshots' => [$galleryPath],
+        ]);
+
+        $removeResponse->assertRedirect('/admin/projects');
+        $project->refresh();
+
+        $this->assertNull($project->cover_image_path);
+        $this->assertNull($project->cover_image_url);
+        Storage::disk('public')->assertMissing($galleryPath);
+        $this->assertEmpty($project->meta['screenshots'] ?? []);
+
+        // 4. Cleanup on project delete
+        $deleteResponse = $this->actingAs($this->admin)->delete("/admin/projects/{$project->id}");
+        $deleteResponse->assertRedirect('/admin/projects');
+        $this->assertDatabaseMissing('projects', ['id' => $project->id]);
+    }
+
+    public function test_admin_can_create_and_delete_project_category(): void
+    {
+        $response = $this->actingAs($this->admin)->postJson('/admin/project-categories', [
+            'name_id' => 'Kecerdasan Buatan',
+            'name_en' => 'Artificial Intelligence',
+        ]);
+
+        $response->assertStatus(201);
+        $response->assertJson([
+            'success' => true,
+            'category' => [
+                'name_id' => 'Kecerdasan Buatan',
+                'name_en' => 'Artificial Intelligence',
+                'slug' => 'artificial-intelligence',
+            ],
+        ]);
+
+        $this->assertDatabaseHas('project_categories', [
+            'name_id' => 'Kecerdasan Buatan',
+            'slug' => 'artificial-intelligence',
+        ]);
+
+        $category = ProjectCategory::where('slug', 'artificial-intelligence')->firstOrFail();
+
+        $deleteResponse = $this->actingAs($this->admin)->deleteJson("/admin/project-categories/{$category->id}");
+        $deleteResponse->assertStatus(200);
+        $deleteResponse->assertJson(['success' => true]);
+
+        $this->assertDatabaseMissing('project_categories', ['id' => $category->id]);
+    }
+
+    public function test_admin_can_create_and_delete_technology(): void
+    {
+        $response = $this->actingAs($this->admin)->postJson('/admin/technologies', [
+            'name' => 'Rust Lang',
+        ]);
+
+        $response->assertStatus(201);
+        $response->assertJson([
+            'success' => true,
+            'technology' => [
+                'name' => 'Rust Lang',
+                'slug' => 'rust-lang',
+            ],
+        ]);
+
+        $this->assertDatabaseHas('technologies', [
+            'name' => 'Rust Lang',
+            'slug' => 'rust-lang',
+        ]);
+
+        $technology = Technology::where('slug', 'rust-lang')->firstOrFail();
+
+        $deleteResponse = $this->actingAs($this->admin)->deleteJson("/admin/technologies/{$technology->id}");
+        $deleteResponse->assertStatus(200);
+        $deleteResponse->assertJson(['success' => true]);
+
+        $this->assertDatabaseMissing('technologies', ['id' => $technology->id]);
+    }
+
     public function test_admin_can_manage_skills(): void
     {
         // Create Skill
@@ -304,6 +449,35 @@ class AdminPanelTest extends TestCase
         $this->assertDatabaseMissing('experiences', ['id' => $experience->id]);
     }
 
+    public function test_admin_can_manage_experience_with_cascading_indonesia_location(): void
+    {
+        $response = $this->actingAs($this->admin)->post('/admin/experiences', [
+            'organization' => 'Bank Mandiri Regional Office',
+            'position_id' => 'Lead Software Engineer',
+            'position_en' => 'Lead Software Engineer',
+            'employment_type' => 'Full-time',
+            'location_type' => 'offline',
+            'province' => 'DKI Jakarta',
+            'city' => 'Kota Jakarta Selatan',
+            'venue_or_platform' => 'Plaza Mandiri Lt. 12',
+            'started_at' => '2025-01-01',
+            'is_current' => '1',
+            'is_visible' => '1',
+        ]);
+
+        $response->assertRedirect('/admin/experiences');
+        $this->assertDatabaseHas('experiences', [
+            'organization' => 'Bank Mandiri Regional Office',
+            'location_type' => 'offline',
+            'province' => 'DKI Jakarta',
+            'city' => 'Kota Jakarta Selatan',
+            'venue_or_platform' => 'Plaza Mandiri Lt. 12',
+        ]);
+
+        $experience = Experience::where('organization', 'Bank Mandiri Regional Office')->firstOrFail();
+        $this->assertStringContainsString('Jakarta Selatan', $experience->location);
+    }
+
     public function test_admin_can_view_update_status_and_delete_contact_messages(): void
     {
         $message = ContactMessage::create([
@@ -337,6 +511,163 @@ class AdminPanelTest extends TestCase
         $deleteResponse = $this->actingAs($this->admin)->delete("/admin/messages/{$message->id}");
         $deleteResponse->assertRedirect('/admin/messages');
         $this->assertDatabaseMissing('contact_messages', ['id' => $message->id]);
+    }
+
+    public function test_admin_can_view_posts_index_and_create_pages(): void
+    {
+        $response = $this->actingAs($this->admin)->get(route('admin.posts.index'));
+        $response->assertStatus(200);
+        $response->assertSee('Manajemen Artikel &amp; Engineering Notes', false);
+
+        $createResponse = $this->actingAs($this->admin)->get(route('admin.posts.create'));
+        $createResponse->assertStatus(200);
+        $createResponse->assertSee('Tulis Artikel Baru');
+    }
+
+    public function test_admin_can_create_post_with_cover_image_and_categories(): void
+    {
+        Storage::fake('public');
+
+        $category = PostCategory::first() ?? PostCategory::create([
+            'name_id' => 'Basis Data',
+            'name_en' => 'Database',
+            'slug' => 'basis-data',
+        ]);
+
+        $cover = UploadedFile::fake()->image('post_cover.jpg', 800, 600);
+
+        $response = $this->actingAs($this->admin)->post(route('admin.posts.store'), [
+            'title_id' => 'Optimasi Indexing PostgreSQL',
+            'title_en' => 'PostgreSQL Indexing Optimization',
+            'slug' => 'optimasi-indexing-postgresql',
+            'excerpt_id' => 'Panduan mendalam indexing database relasional.',
+            'excerpt_en' => 'In-depth guide to relational database indexing.',
+            'content_id' => 'Ini adalah konten lengkap artikel mengenai indexing B-Tree dan GIN.',
+            'content_en' => 'This is the full content of the article regarding B-Tree and GIN indexing.',
+            'cover_image' => $cover,
+            'status' => 'published',
+            'categories' => [$category->id],
+        ]);
+
+        $response->assertRedirect(route('admin.posts.index'));
+        $response->assertSessionHas('success');
+
+        $this->assertDatabaseHas('posts', [
+            'title_id' => 'Optimasi Indexing PostgreSQL',
+            'slug' => 'optimasi-indexing-postgresql',
+            'status' => 'published',
+        ]);
+
+        $post = Post::where('slug', 'optimasi-indexing-postgresql')->firstOrFail();
+        $this->assertNotNull($post->cover_image_path);
+        Storage::disk('public')->assertExists($post->cover_image_path);
+        $this->assertTrue($post->categories->contains($category->id));
+        $this->assertNotNull($post->published_at);
+    }
+
+    public function test_admin_can_update_post_and_remove_cover(): void
+    {
+        Storage::fake('public');
+
+        $cover = UploadedFile::fake()->image('cover_initial.jpg');
+        $path = $cover->store('posts', 'public');
+
+        $post = Post::create([
+            'title_id' => 'Arsitektur Event Driven',
+            'title_en' => 'Event Driven Architecture',
+            'slug' => 'arsitektur-event-driven',
+            'excerpt_id' => 'Ringkasan arsitektur',
+            'excerpt_en' => 'Architecture summary',
+            'content_id' => 'Konten detail arsitektur.',
+            'content_en' => 'Detailed architecture content.',
+            'cover_image_path' => $path,
+            'status' => 'draft',
+        ]);
+
+        $editResponse = $this->actingAs($this->admin)->get(route('admin.posts.edit', $post));
+        $editResponse->assertStatus(200);
+        $editResponse->assertSee('Arsitektur Event Driven');
+
+        $updateResponse = $this->actingAs($this->admin)->put(route('admin.posts.update', $post), [
+            'title_id' => 'Arsitektur Event Driven Terdistribusi',
+            'title_en' => 'Distributed Event Driven Architecture',
+            'slug' => 'arsitektur-event-driven-terdistribusi',
+            'excerpt_id' => 'Ringkasan arsitektur terdistribusi',
+            'excerpt_en' => 'Distributed architecture summary',
+            'content_id' => 'Konten detail baru.',
+            'content_en' => 'New detailed content.',
+            'remove_cover_image' => '1',
+            'status' => 'published',
+        ]);
+
+        $updateResponse->assertRedirect(route('admin.posts.index'));
+        $this->assertDatabaseHas('posts', [
+            'id' => $post->id,
+            'title_id' => 'Arsitektur Event Driven Terdistribusi',
+            'cover_image_path' => null,
+            'status' => 'published',
+        ]);
+        Storage::disk('public')->assertMissing($path);
+    }
+
+    public function test_admin_can_delete_post(): void
+    {
+        Storage::fake('public');
+
+        $cover = UploadedFile::fake()->image('delete_me.jpg');
+        $path = $cover->store('posts', 'public');
+
+        $post = Post::create([
+            'title_id' => 'Artikel yang Akan Dihapus',
+            'title_en' => 'Article to be Deleted',
+            'slug' => 'artikel-akan-dihapus',
+            'excerpt_id' => 'Ringkasan',
+            'excerpt_en' => 'Summary',
+            'content_id' => 'Konten',
+            'content_en' => 'Content',
+            'cover_image_path' => $path,
+            'status' => 'draft',
+        ]);
+
+        $response = $this->actingAs($this->admin)->delete(route('admin.posts.destroy', $post));
+        $response->assertRedirect(route('admin.posts.index'));
+        $this->assertDatabaseMissing('posts', ['id' => $post->id]);
+        Storage::disk('public')->assertMissing($path);
+    }
+
+    public function test_admin_can_create_and_delete_post_category(): void
+    {
+        $response = $this->actingAs($this->admin)->post(route('admin.post-categories.store'), [
+            'name_id' => 'Kecerdasan Buatan',
+            'name_en' => 'Artificial Intelligence',
+        ]);
+
+        $response->assertRedirect();
+        $this->assertDatabaseHas('post_categories', [
+            'name_id' => 'Kecerdasan Buatan',
+            'slug' => 'artificial-intelligence',
+        ]);
+
+        $category = PostCategory::where('slug', 'artificial-intelligence')->firstOrFail();
+
+        // AJAX JSON store response
+        $ajaxResponse = $this->actingAs($this->admin)->postJson(route('admin.post-categories.store'), [
+            'name_id' => 'Keamanan Sistem',
+            'name_en' => 'System Security',
+        ]);
+        $ajaxResponse->assertStatus(201);
+        $ajaxResponse->assertJson([
+            'success' => true,
+            'category' => [
+                'name_id' => 'Keamanan Sistem',
+                'name_en' => 'System Security',
+            ],
+        ]);
+
+        // Delete category
+        $deleteResponse = $this->actingAs($this->admin)->delete(route('admin.post-categories.destroy', $category));
+        $deleteResponse->assertRedirect();
+        $this->assertDatabaseMissing('post_categories', ['id' => $category->id]);
     }
 
     public function test_admin_can_logout(): void

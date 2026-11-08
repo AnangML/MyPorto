@@ -31,7 +31,7 @@ class QualityAssuranceTest extends TestCase
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml');
         $response->assertSee(url('/'));
-        $response->assertSee('enterprise-asset-tracking-system');
+        $response->assertSee('certificate-list-management');
     }
 
     public function test_sitemap_xml_excludes_draft_and_archived_projects(): void

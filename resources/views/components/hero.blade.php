@@ -17,14 +17,23 @@
             @endif
 
             <!-- Main Editorial Headline with Vibrant Blue Serif Accent -->
+            @php
+                $headlineParts = $profile?->headline_parts ?? [
+                    'prefix' => __('portfolio.hero.headline_prefix') . ' ' . __('portfolio.hero.headline_middle'),
+                    'accent' => __('portfolio.hero.headline_accent'),
+                    'suffix' => '',
+                ];
+            @endphp
             <h1 class="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] leading-[1.1] max-w-xl">
-                {{ __('portfolio.hero.headline_prefix') }}
-                <span class="block">
-                    {{ __('portfolio.hero.headline_middle') }}
+                <span>{{ $headlineParts['prefix'] }}</span>
+                @if(!empty($headlineParts['accent']))
                     <span class="font-serif-accent italic font-normal text-blue-600 dark:text-sky-400 text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-normal inline-block ml-1">
-                        {{ __('portfolio.hero.headline_accent') }}
+                        {{ $headlineParts['accent'] }}
                     </span>
-                </span>
+                @endif
+                @if(!empty($headlineParts['suffix']))
+                    <span>{{ $headlineParts['suffix'] }}</span>
+                @endif
             </h1>
 
             <!-- Bio Subtitle (Dynamic from DB with fallback) -->
@@ -49,24 +58,14 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                 </a>
-            </div>
 
-            <!-- Tech Badges / Stack Info -->
-            <div class="flex items-center gap-3 pt-2 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                    Laravel 12 / PHP 8.3
-                </span>
-                <span class="text-slate-300 dark:text-slate-700">•</span>
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                    PostgreSQL
-                </span>
-                <span class="text-slate-300 dark:text-slate-700">•</span>
-                <span class="flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
-                    Tailwind CSS
-                </span>
+                <!-- Download CV Button -->
+                <a href="{{ route('cv.download') }}" target="_blank" class="inline-flex items-center gap-2 px-4 sm:px-5 py-3 rounded-2xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/80 text-blue-700 dark:text-blue-300 font-medium text-xs sm:text-sm hover:bg-blue-100/80 dark:hover:bg-blue-900/60 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-xs group" title="Download Resume / CV (PDF)">
+                    <svg class="w-4 h-4 text-blue-600 dark:text-sky-400 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>{{ __('portfolio.hero.download_cv') }}</span>
+                </a>
             </div>
         </div>
 

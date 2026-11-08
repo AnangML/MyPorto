@@ -14,6 +14,13 @@
 
             <!-- Quick Action Buttons -->
             <div class="flex items-center gap-3">
+                <a href="{{ route('admin.posts.create') }}" class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-sm hover:-translate-y-0.5 active:translate-y-0 transition-all">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Tulis Artikel</span>
+                </a>
+
                 <a href="{{ route('admin.trainings.create') }}" class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-semibold text-xs shadow-sm hover:-translate-y-0.5 active:translate-y-0 transition-all">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -35,7 +42,7 @@
         </div>
 
         <!-- Metric Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <!-- Card 1: Projects -->
             <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs">
                 <div class="flex items-center justify-between">
@@ -117,7 +124,27 @@
                 </div>
             </div>
 
-            <!-- Card 4: Inbox Messages -->
+            <!-- Card 5: Artikel & Catatan -->
+            <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Artikel &amp; Catatan</span>
+                    <span class="p-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="mt-4 flex items-baseline justify-between">
+                    <span class="text-3xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                        {{ $stats['total_posts'] ?? 0 }}
+                    </span>
+                    <a href="{{ route('admin.posts.index') }}" class="text-xs text-blue-600 dark:text-sky-400 hover:underline">
+                        Kelola &rarr;
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 6: Inbox Messages -->
             <div class="p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-xs">
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Pesan Masuk</span>

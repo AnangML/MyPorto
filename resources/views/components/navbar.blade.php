@@ -1,3 +1,18 @@
+@php
+    $activeNav = 'home';
+    if (request()->routeIs('projects.show')) {
+        $activeNav = 'work';
+    } elseif (request()->routeIs('posts.show')) {
+        $activeNav = 'blog';
+    }
+
+    $desktopActiveClasses = 'nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 bg-blue-600 text-white shadow-[0_2px_12px_rgba(37,99,235,0.35)] dark:bg-blue-600 dark:text-white';
+    $desktopInactiveClasses = 'nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70';
+
+    $mobileActiveClasses = 'mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-sky-400 font-semibold border-l-4 border-blue-600';
+    $mobileInactiveClasses = 'mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 font-medium';
+@endphp
+
 <header class="fixed top-0 inset-x-0 z-50 pt-3 sm:pt-4 px-4 sm:px-8 flex justify-center pointer-events-none">
     <nav class="pointer-events-auto backdrop-blur-md bg-white/85 dark:bg-[#1E293B]/90 border border-slate-200/80 dark:border-slate-700/80 shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:shadow-none rounded-full px-3 py-2 sm:px-4 sm:py-2 flex items-center justify-between sm:justify-center gap-2 sm:gap-4 transition-all duration-200">
         
@@ -8,19 +23,22 @@
 
         <!-- Desktop Navigation Links (Pill Navigation with Vibrant Blue Active State) -->
         <div id="desktop-nav-links" class="hidden sm:flex items-center gap-1 text-sm">
-            <a href="{{ route('home') }}#home" data-target="home" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 bg-blue-600 text-white shadow-[0_2px_12px_rgba(37,99,235,0.35)] dark:bg-blue-600 dark:text-white">
+            <a href="{{ route('home') }}#home" data-target="home" class="{{ $activeNav === 'home' ? $desktopActiveClasses : $desktopInactiveClasses }}">
                 {{ __('portfolio.nav.home') }}
             </a>
-            <a href="{{ route('home') }}#about" data-target="about" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
+            <a href="{{ route('home') }}#about" data-target="about" class="{{ $activeNav === 'about' ? $desktopActiveClasses : $desktopInactiveClasses }}">
                 {{ __('portfolio.nav.about') }}
             </a>
-            <a href="{{ route('home') }}#work" data-target="work" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
+            <a href="{{ route('home') }}#work" data-target="work" class="{{ $activeNav === 'work' ? $desktopActiveClasses : $desktopInactiveClasses }}">
                 {{ __('portfolio.nav.work') }}
             </a>
-            <a href="{{ route('home') }}#blog" data-target="blog" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
+            <a href="{{ route('home') }}#credentials" data-target="credentials" class="{{ $activeNav === 'credentials' ? $desktopActiveClasses : $desktopInactiveClasses }}">
+                {{ __('portfolio.nav.credentials') }}
+            </a>
+            <a href="{{ route('home') }}#blog" data-target="blog" class="{{ $activeNav === 'blog' ? $desktopActiveClasses : $desktopInactiveClasses }}">
                 {{ __('portfolio.nav.blog') }}
             </a>
-            <a href="{{ route('home') }}#contact" data-target="contact" class="nav-spy-link nav-anchor px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/70">
+            <a href="{{ route('home') }}#contact" data-target="contact" class="{{ $activeNav === 'contact' ? $desktopActiveClasses : $desktopInactiveClasses }}">
                 {{ __('portfolio.nav.contact') }}
             </a>
         </div>
@@ -64,19 +82,22 @@
 <!-- Mobile Menu Drawer -->
 <div id="mobile-menu" class="hidden sm:hidden fixed inset-x-4 top-16 z-50 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-4 transition-all duration-300">
     <div class="flex flex-col gap-1.5 text-sm font-medium">
-        <a href="{{ route('home') }}#home" data-target="home" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-sky-400 font-semibold border-l-4 border-blue-600">
+        <a href="{{ route('home') }}#home" data-target="home" class="{{ $activeNav === 'home' ? $mobileActiveClasses : $mobileInactiveClasses }}">
             {{ __('portfolio.nav.home') }}
         </a>
-        <a href="{{ route('home') }}#about" data-target="about" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+        <a href="{{ route('home') }}#about" data-target="about" class="{{ $activeNav === 'about' ? $mobileActiveClasses : $mobileInactiveClasses }}">
             {{ __('portfolio.nav.about') }}
         </a>
-        <a href="{{ route('home') }}#work" data-target="work" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+        <a href="{{ route('home') }}#work" data-target="work" class="{{ $activeNav === 'work' ? $mobileActiveClasses : $mobileInactiveClasses }}">
             {{ __('portfolio.nav.work') }}
         </a>
-        <a href="{{ route('home') }}#blog" data-target="blog" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+        <a href="{{ route('home') }}#credentials" data-target="credentials" class="{{ $activeNav === 'credentials' ? $mobileActiveClasses : $mobileInactiveClasses }}">
+            {{ __('portfolio.nav.credentials') }}
+        </a>
+        <a href="{{ route('home') }}#blog" data-target="blog" class="{{ $activeNav === 'blog' ? $mobileActiveClasses : $mobileInactiveClasses }}">
             {{ __('portfolio.nav.blog') }}
         </a>
-        <a href="{{ route('home') }}#contact" data-target="contact" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+        <a href="{{ route('home') }}#contact" data-target="contact" class="{{ $activeNav === 'contact' ? $mobileActiveClasses : $mobileInactiveClasses }}">
             {{ __('portfolio.nav.contact') }}
         </a>
     </div>
@@ -94,7 +115,8 @@
         }
 
         // Section IDs for scrollspy
-        const sectionIds = ['home', 'about', 'work', 'blog', 'contact'];
+        const sectionIds = ['home', 'about', 'work', 'credentials', 'blog', 'contact'];
+        const isSinglePage = Boolean(document.getElementById('home') && document.getElementById('work'));
 
         // Class definitions for active & inactive states
         const DESKTOP_ACTIVE = ['bg-blue-600', 'text-white', 'shadow-[0_2px_12px_rgba(37,99,235,0.35)]', 'dark:bg-blue-600', 'dark:text-white', 'font-semibold'];
@@ -103,7 +125,7 @@
         const MOBILE_ACTIVE = ['bg-blue-50', 'dark:bg-blue-950/60', 'text-blue-600', 'dark:text-sky-400', 'font-semibold', 'border-l-4', 'border-blue-600'];
         const MOBILE_INACTIVE = ['text-slate-600', 'dark:text-slate-400', 'hover:text-blue-600', 'dark:hover:text-blue-400', 'hover:bg-slate-50', 'dark:hover:bg-slate-800/50', 'font-medium'];
 
-        let activeSection = 'home';
+        let activeSection = '{{ $activeNav }}';
         let isManualScrolling = false;
         let manualScrollTimer = null;
 
@@ -192,60 +214,62 @@
         });
 
         // Scrollspy calculation using requestAnimationFrame
-        let scrollTicking = false;
-        function onScroll() {
-            if (isManualScrolling) return;
+        if (isSinglePage) {
+            let scrollTicking = false;
+            function onScroll() {
+                if (isManualScrolling) return;
 
-            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
 
-            // If scrolled near the bottom of the page, activate the contact section
-            if (scrollY + windowHeight >= documentHeight - 60) {
-                setActive('contact');
-                return;
-            }
+                // If scrolled near the bottom of the page, activate the contact section
+                if (scrollY + windowHeight >= documentHeight - 60) {
+                    setActive('contact');
+                    return;
+                }
 
-            // If at the very top of the page, activate home
-            if (scrollY < 120) {
-                setActive('home');
-                return;
-            }
+                // If at the very top of the page, activate home
+                if (scrollY < 120) {
+                    setActive('home');
+                    return;
+                }
 
-            // Find current section in view
-            const navOffset = 130;
-            let current = 'home';
+                // Find current section in view
+                const navOffset = 130;
+                let current = 'home';
 
-            for (const id of sectionIds) {
-                const el = document.getElementById(id);
-                if (el) {
-                    const top = el.offsetTop - navOffset;
-                    if (scrollY >= top) {
-                        current = id;
+                for (const id of sectionIds) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        const top = el.offsetTop - navOffset;
+                        if (scrollY >= top) {
+                            current = id;
+                        }
                     }
                 }
+
+                setActive(current);
             }
 
-            setActive(current);
-        }
+            window.addEventListener('scroll', () => {
+                if (!scrollTicking) {
+                    window.requestAnimationFrame(() => {
+                        onScroll();
+                        scrollTicking = false;
+                    });
+                    scrollTicking = true;
+                }
+            }, { passive: true });
 
-        window.addEventListener('scroll', () => {
-            if (!scrollTicking) {
-                window.requestAnimationFrame(() => {
-                    onScroll();
-                    scrollTicking = false;
-                });
-                scrollTicking = true;
-            }
-        }, { passive: true });
-
-        // Check hash on initial load
-        if (window.location.hash) {
-            const hashTarget = window.location.hash.substring(1);
-            if (sectionIds.includes(hashTarget)) {
-                setTimeout(() => {
-                    scrollToTarget(hashTarget);
-                }, 100);
+            // Check hash on initial load
+            if (window.location.hash) {
+                const hashTarget = window.location.hash.substring(1);
+                if (sectionIds.includes(hashTarget)) {
+                    setTimeout(() => {
+                        scrollToTarget(hashTarget);
+                    }, 100);
+                }
             }
         }
     });

@@ -35,12 +35,25 @@
                         @forelse($projects as $project)
                             <tr class="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition-colors">
                                 <td class="p-4">
-                                    <a href="{{ route('projects.show', $project->slug) }}" target="_blank" class="font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-sky-400 block">
-                                        {{ $project->title_id }}
-                                    </a>
-                                    <span class="text-slate-400 text-[11px] block mt-0.5 font-mono">
-                                        {{ $project->role_id ?? 'Backend Architecture' }} &bull; /projects/{{ $project->slug }}
-                                    </span>
+                                    <div class="flex items-center gap-3">
+                                        @if($project->cover_image_url)
+                                            <img src="{{ $project->cover_image_url }}" alt="{{ $project->title_id }}" class="w-14 h-9 rounded-lg object-cover border border-slate-200 dark:border-slate-700 shrink-0 bg-slate-100 dark:bg-slate-800">
+                                        @else
+                                            <div class="w-14 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 shrink-0" title="Belum ada foto tampilan">
+                                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            </div>
+                                        @endif
+                                        <div class="min-w-0">
+                                            <a href="{{ route('projects.show', $project->slug) }}" target="_blank" class="font-bold text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-sky-400 block truncate">
+                                                {{ $project->title_id }}
+                                            </a>
+                                            <span class="text-slate-400 text-[11px] block mt-0.5 font-mono truncate">
+                                                {{ $project->role_id ?? 'Backend Architecture' }} &bull; /projects/{{ $project->slug }}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="p-4">
                                     <div class="flex flex-wrap gap-1 mb-1">

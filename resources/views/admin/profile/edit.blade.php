@@ -149,13 +149,26 @@
                             id="email_public" 
                             name="email_public" 
                             value="{{ old('email_public', $profile->email_public) }}" 
-                            placeholder="anang.developer@example.com"
+                            placeholder="ananglutfi2003@gmail.com"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <label for="whatsapp" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                            Nomor WhatsApp
+                        </label>
+                        <input 
+                            type="text" 
+                            id="whatsapp" 
+                            name="whatsapp" 
+                            value="{{ old('whatsapp', $profile->meta['whatsapp'] ?? '') }}" 
+                            placeholder="082121830454"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        />
+                    </div>
                     <div>
                         <label for="location" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                             Lokasi
@@ -211,6 +224,9 @@
                             required 
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
+                        <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
+                            Tips: Apit dengan tanda bintang seperti <span class="font-mono text-blue-600 dark:text-sky-400">*Dampak Nyata*</span> untuk memberi efek aksen serif biru miring pada kata yang diinginkan. Jika tanpa tanda bintang, kata terakhir otomatis diberi aksen biru.
+                        </p>
                     </div>
 
                     <div>
@@ -225,6 +241,9 @@
                             required 
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
+                        <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
+                            Tips: Wrap with asterisks like <span class="font-mono text-blue-600 dark:text-sky-400">*Impact Daily*</span> to apply the blue italic serif accent.
+                        </p>
                     </div>
 
                     <div>

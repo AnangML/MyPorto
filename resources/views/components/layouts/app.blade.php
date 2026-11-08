@@ -98,23 +98,37 @@
         </div>
 
         <!-- Footer -->
+        @php
+            $layoutProfile = \App\Models\ProfileSetting::current();
+        @endphp
         <footer class="mt-24 border-t border-slate-100 dark:border-slate-800/80 py-8 text-xs text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>Anang Muhamad Lutfi &copy; {{ date('Y') }}. {{ __('portfolio.common.all_rights_reserved') }}</span>
+                <span>{{ $layoutProfile?->display_name ?? 'Anang Muhamad Lutfi' }} &copy; {{ date('Y') }}. {{ __('portfolio.common.all_rights_reserved') }}</span>
             </div>
             
             <div class="flex items-center gap-6">
-                <a href="https://github.com/AnangML" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <a href="{{ route('cv.download') }}" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium flex items-center gap-1 text-slate-700 dark:text-slate-200">
+                    <svg class="w-3.5 h-3.5 text-blue-600 dark:text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>CV (PDF)</span>
+                </a>
+                <a href="{{ $layoutProfile?->github_url ?? 'https://github.com/AnangML' }}" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     GitHub
                 </a>
-                <a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                @if($layoutProfile?->linkedin_url)
+                    <a href="{{ $layoutProfile->linkedin_url }}" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        LinkedIn
+                    </a>
+                @endif
+                <a href="{{ route('home') }}#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.about') }}
                 </a>
-                <a href="#work" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <a href="{{ route('home') }}#work" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.work') }}
                 </a>
-                <a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <a href="{{ route('home') }}#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                     {{ __('portfolio.nav.contact') }}
                 </a>
             </div>

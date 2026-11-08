@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use App\Models\Experience;
+use App\Models\Post;
 use App\Models\ProfileSetting;
 use App\Models\Project;
 use App\Models\Skill;
@@ -25,6 +26,8 @@ class DashboardController extends Controller
             'total_skills' => Skill::count(),
             'total_experiences' => Experience::count(),
             'total_trainings' => Training::count(),
+            'total_posts' => Post::count(),
+            'published_posts' => Post::published()->count(),
             'total_messages' => ContactMessage::count(),
             'unread_messages' => ContactMessage::unread()->count(),
         ];

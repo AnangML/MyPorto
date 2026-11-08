@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Experience;
+use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\ProfileSetting;
 use App\Models\Project;
 use App\Models\ProjectCategory;
@@ -39,7 +41,7 @@ class PortfolioSeeder extends Seeder
                 'bio_id' => 'Saya adalah Backend & Web Developer dengan latar belakang Teknik Informatika di Universitas Pamulang. Berfokus pada perancangan sistem web performa tinggi, RESTful API yang aman, arsitektur database PostgreSQL yang terukur, dan rekayasa perangkat lunak modern.',
                 'bio_en' => 'I am a Backend & Web Developer with an Informatics background from Universitas Pamulang. Focused on designing high-performance web systems, secure RESTful APIs, scalable PostgreSQL database architectures, and modern software engineering.',
                 'location' => 'Tangerang Selatan, Indonesia',
-                'email_public' => 'anang.developer@example.com',
+                'email_public' => 'ananglutfi2003@gmail.com',
                 'github_url' => 'https://github.com/AnangML',
                 'linkedin_url' => 'https://linkedin.com/in/anang-muhamad-lutfi',
                 'availability_status' => true,
@@ -48,6 +50,7 @@ class PortfolioSeeder extends Seeder
                 'seo_description_id' => 'Portofolio profesional Anang Muhamad Lutfi, Backend & Web Developer Indonesia.',
                 'seo_description_en' => 'Professional portfolio of Anang Muhamad Lutfi, Backend & Web Developer based in Indonesia.',
                 'meta' => [
+                    'whatsapp' => '082121830454',
                     'education' => 'Universitas Pamulang - Teknik Informatika (Lulus 2026)',
                     'primary_stack' => ['PHP', 'Laravel', 'PostgreSQL', 'Tailwind CSS'],
                 ],
@@ -80,83 +83,55 @@ class PortfolioSeeder extends Seeder
             'alpine' => Technology::firstOrCreate(['slug' => 'alpine-js'], ['name' => 'Alpine.js', 'icon_key' => 'alpinejs']),
             'rest' => Technology::firstOrCreate(['slug' => 'restful-api'], ['name' => 'RESTful API', 'icon_key' => 'api']),
             'git' => Technology::firstOrCreate(['slug' => 'git'], ['name' => 'Git & GitHub', 'icon_key' => 'git']),
+            'nodejs' => Technology::firstOrCreate(['slug' => 'node-js'], ['name' => 'Node.js', 'icon_key' => 'nodejs']),
         ];
 
         // 5. Featured Projects
-        $p1 = Project::firstOrCreate(
-            ['slug' => 'enterprise-asset-tracking-system'],
+        $p1 = Project::updateOrCreate(
+            ['slug' => 'certificate-list-management'],
             [
-                'title_id' => 'Sistem Manajemen & Pelacakan Aset Perusahaan',
-                'title_en' => 'Enterprise Asset Management & Tracking System',
-                'summary_id' => 'Arsitektur backend tangguh dengan pelaporan otomatis dan manajemen hak akses berbasis peran (RBAC).',
-                'summary_en' => 'High-performance backend architecture with automated reporting and role-based access control (RBAC).',
-                'description_id' => 'Aplikasi manajemen aset komprehensif yang dirancang untuk mengelola siklus hidup aset perusahaan secara efisien. Menggunakan database PostgreSQL dengan indexing teroptimasi untuk menangani ribuan pencatatan inventaris secara instan.',
-                'description_en' => 'A comprehensive asset management platform designed to manage enterprise asset lifecycles efficiently. Powered by PostgreSQL with optimized indexing to handle thousands of inventory records seamlessly.',
-                'role_id' => 'Lead Backend Engineer',
-                'role_en' => 'Lead Backend Engineer',
-                'client_name' => 'Internal Enterprise Project',
-                'project_url' => 'https://example.com/demo-asset',
-                'repository_url' => 'https://github.com/AnangML',
+                'title_id' => 'Sistem Manajemen Sertifikasi (Certificate List Management)',
+                'title_en' => 'Centralized Certificate Management System',
+                'summary_id' => 'Platform pengelolaan sertifikat terpusat untuk Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang guna meningkatkan efisiensi waktu percetakan dan validasi berkas.',
+                'summary_en' => 'Centralized certificate management platform for Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang, accelerating verification and issuance workflows.',
+                'description_id' => "Sistem Manajemen Sertifikasi ini dikembangkan untuk memecahkan kendala operasional dalam pendataan dan penerbitan sertifikat kompetensi mahasiswa di Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang.\n\nSistem ini menyediakan repositori data sertifikat terpusat yang aman, mempermudah pencarian dan validasi keabsahan secara cepat, serta memangkas proses manual percetakan sertifikat secara signifikan sehingga meningkatkan efisiensi waktu staf dan akurasi data.",
+                'description_en' => "The Certificate Management System was engineered to resolve manual processing bottlenecks in handling student competency certificates at Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang.\n\nThe platform provides a secure centralized database repository, rapid certificate verification tools, and streamlined batch workflows that drastically reduce physical printing time and ensure data integrity.",
+                'role_id' => 'Backend & Database Developer',
+                'role_en' => 'Backend & Database Developer',
+                'client_name' => 'Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang',
+                'project_url' => null,
+                'repository_url' => null,
                 'status' => 'published',
                 'is_featured' => true,
                 'sort_order' => 1,
-                'started_at' => '2025-01-10',
-                'completed_at' => '2025-06-20',
                 'published_at' => now(),
             ]
         );
-        $p1->categories()->sync([$catWeb->id, $catFullstack->id]);
+        $p1->categories()->sync([$catWeb->id]);
         $p1->technologies()->sync([$techs['laravel']->id, $techs['pgsql']->id, $techs['tailwind']->id]);
 
-        $p2 = Project::firstOrCreate(
-            ['slug' => 'real-time-payment-gateway-service'],
+        $p2 = Project::updateOrCreate(
+            ['slug' => 'sistem-informasi-posyandu-soka'],
             [
-                'title_id' => 'Layanan Gateway Pembayaran & Integrasi Webhook',
-                'title_en' => 'Real-Time Payment Gateway & Webhook Service',
-                'summary_id' => 'Mesin pemrosesan transaksi skalabel dengan mekanisme dispatch webhook asinkron dan audit logging.',
-                'summary_en' => 'Scalable transaction processing engine with asynchronous webhook dispatching and comprehensive audit logging.',
-                'description_id' => 'Layanan API backend mikro yang mengamankan transaksi pembayaran dengan validasi idempotency key, verifikasi HMAC signature, dan queue worker otomatis untuk menjamin keandalan data finansial.',
-                'description_en' => 'A micro backend API service that secures payment transactions with idempotency keys, HMAC signature verification, and automated background queue workers ensuring zero data loss.',
-                'role_id' => 'Backend API Developer',
-                'role_en' => 'Backend API Developer',
-                'client_name' => 'Fintech Solution Integration',
-                'project_url' => 'https://example.com/demo-payment',
-                'repository_url' => 'https://github.com/AnangML',
+                'title_id' => 'Sistem Informasi Posyandu Soka',
+                'title_en' => 'Posyandu Soka Community Healthcare System',
+                'summary_id' => 'Aplikasi web digitalisasi layanan Posyandu Soka untuk mempermudah pendaftaran pasien, pencatatan jadwal dan hasil pemeriksaan, serta pengelolaan profil posyandu.',
+                'summary_en' => 'Digital healthcare web application for Posyandu Soka, streamlining patient registrations, medical checkup records, and clinic administrative workflows.',
+                'description_id' => "Aplikasi web yang dibangun untuk memodernisasi operasional pelayanan kesehatan masyarakat di Posyandu Soka.\n\nSistem ini memfasilitasi kader posyandu dalam mengelola profil institusi serta mendigitalisasi rekam data pasien mulai dari pendaftaran pasien baru hingga pencatatan hasil pemeriksaan rutin (anak & lansia), menghadirkan efisiensi waktu, transparansi data, dan kemudahan bagi para kader dalam membuat laporan berkala.",
+                'description_en' => "A full-featured web application engineered to modernize community healthcare operations at Posyandu Soka.\n\nThe system enables healthcare volunteers (kader) to maintain clinic profiles, register incoming patients digitally, and record routine medical checkup results, delivering high operational efficiency and effortless periodic health reporting.",
+                'role_id' => 'Web Developer',
+                'role_en' => 'Web Developer',
+                'client_name' => 'Posyandu Soka',
+                'project_url' => null,
+                'repository_url' => null,
                 'status' => 'published',
                 'is_featured' => true,
                 'sort_order' => 2,
-                'started_at' => '2025-07-01',
-                'completed_at' => '2025-11-15',
                 'published_at' => now(),
             ]
         );
-        $p2->categories()->sync([$catApi->id]);
-        $p2->technologies()->sync([$techs['php']->id, $techs['laravel']->id, $techs['pgsql']->id, $techs['rest']->id]);
-
-        $p3 = Project::firstOrCreate(
-            ['slug' => 'privacy-first-analytics-dashboard'],
-            [
-                'title_id' => 'Dashboard Analitik Kunjungan Berorientasi Privasi',
-                'title_en' => 'Privacy-First Web Analytics & Reporting Engine',
-                'summary_id' => 'Visualisasi analitik responsif dan ringan yang dirancang dengan agregasi metrik ramah privasi.',
-                'summary_en' => 'Lightweight, responsive analytics visualization designed with first-party privacy metrics aggregation.',
-                'description_id' => 'Engine statistik berbasis web untuk memantau metrik pengunjung secara real-time tanpa pelacak pihak ketiga. Menghitung data agregasi harian secara efisien dengan kueri PostgreSQL yang dioptimasi.',
-                'description_en' => 'A web-based analytics engine tracking visitor metrics in real-time without third-party invasive trackers. Aggregates daily views efficiently using optimized PostgreSQL queries.',
-                'role_id' => 'Full-Stack Developer',
-                'role_en' => 'Full-Stack Developer',
-                'client_name' => 'Open Source Tool',
-                'project_url' => 'https://example.com/demo-analytics',
-                'repository_url' => 'https://github.com/AnangML',
-                'status' => 'published',
-                'is_featured' => true,
-                'sort_order' => 3,
-                'started_at' => '2026-01-05',
-                'completed_at' => '2026-04-10',
-                'published_at' => now(),
-            ]
-        );
-        $p3->categories()->sync([$catWeb->id, $catFullstack->id]);
-        $p3->technologies()->sync([$techs['laravel']->id, $techs['tailwind']->id, $techs['alpine']->id, $techs['pgsql']->id]);
+        $p2->categories()->sync([$catWeb->id]);
+        $p2->technologies()->sync([$techs['nodejs']->id]);
 
         // 6. Skills
         $skills = [
@@ -182,29 +157,76 @@ class PortfolioSeeder extends Seeder
                 'position_en' => 'Computer Science / Informatics Undergraduate',
                 'description_id' => 'Mendalami rekayasa perangkat lunak, struktur data dan algoritma, perancangan basis data relasional, dan pengembangan aplikasi berbasis web. Target lulus tahun 2026.',
                 'description_en' => 'Studying software engineering, data structures and algorithms, relational database systems, and full-stack web application development. Graduating class of 2026.',
-                'location' => 'Tangerang Selatan, Indonesia',
+                'location' => 'Kota Serang, Banten',
+                'location_type' => 'offline',
+                'province' => 'Banten',
+                'city' => 'Kota Serang',
                 'employment_type' => 'Education',
                 'started_at' => '2022-09-01',
-                'ended_at' => '2026-08-31',
+                'ended_at' => null,
                 'is_current' => true,
                 'sort_order' => 1,
             ]
         );
 
         Experience::firstOrCreate(
-            ['organization' => 'Independent / Freelance Projects'],
+            ['organization' => 'SMK N 43 Jakarta'],
             [
-                'position_id' => 'Backend & Web Developer',
-                'position_en' => 'Backend & Web Developer',
-                'description_id' => 'Merancang dan mengimplementasikan aplikasi web berbasis Laravel dan PostgreSQL untuk berbagai kebutuhan klien, mulai dari sistem inventaris internal hingga API gateway.',
-                'description_en' => 'Designing and implementing web applications powered by Laravel and PostgreSQL for client initiatives, ranging from internal tracking platforms to RESTful API services.',
-                'location' => 'Remote',
-                'employment_type' => 'Freelance',
-                'started_at' => '2024-01-01',
-                'ended_at' => null,
-                'is_current' => true,
+                'position_id' => 'Teknik Komputer dan Jaringan',
+                'position_en' => 'Computer and Network Engineering',
+                'description_id' => 'Pendidikan kejuruan bidang teknik komputer dan jaringan, mempelajari arsitektur komputer, instalasi jaringan, sistem operasi, dan perakitan serta troubleshooting sistem komputer.',
+                'description_en' => 'Vocational secondary education focusing on computer hardware, network infrastructure, operating systems, and systems maintenance.',
+                'location' => 'Kota Jakarta Selatan, DKI Jakarta',
+                'location_type' => 'offline',
+                'province' => 'DKI Jakarta',
+                'city' => 'Kota Jakarta Selatan',
+                'employment_type' => 'Education',
+                'started_at' => '2019-07-01',
+                'ended_at' => '2022-06-30',
+                'is_current' => false,
                 'sort_order' => 2,
             ]
         );
+
+        // 8. Post Categories & Initial Engineering Notes
+        $catDb = PostCategory::firstOrCreate(['slug' => 'database-performance'], [
+            'name_id' => 'PostgreSQL & Performa',
+            'name_en' => 'PostgreSQL & Performance',
+        ]);
+
+        $catArch = PostCategory::firstOrCreate(['slug' => 'backend-architecture'], [
+            'name_id' => 'Arsitektur Backend',
+            'name_en' => 'Backend Architecture',
+        ]);
+
+        $post1 = Post::firstOrCreate(
+            ['slug' => 'indexing-strategies-for-high-volume-relational-queries-in-laravel-12'],
+            [
+                'title_id' => 'Strategi Indexing untuk Kueri Relasional Volume Tinggi di Laravel 12',
+                'title_en' => 'Indexing Strategies for High-Volume Relational Queries in Laravel 12',
+                'excerpt_id' => 'Pendalaman partial index, composite B-Tree, dan teknik optimasi kueri JSONB pada database PostgreSQL.',
+                'excerpt_en' => 'A deep dive into partial indexes, composite B-Trees, and JSONB query optimization techniques on PostgreSQL.',
+                'content_id' => "Ketika menangani jutaan baris data relasional pada PostgreSQL, eksekusi kueri yang lambat sering kali disebabkan oleh full table scan. Artikel ini membahas strategi perancangan index komposit, penggunaan partial index untuk kolom status, dan indexing GIN/GIST pada kolom JSONB.\n\n### 1. Composite B-Tree Index\nMemahami urutan kolom dalam indeks sangat krusial. Letakkan kolom dengan kardinalitas tertinggi atau yang paling sering digunakan dalam klausa WHERE pada posisi terdepan.\n\n### 2. Partial Indexing\nJika tabel menyimpan status (seperti 'pending', 'processed', 'failed'), kita bisa menghemat ukuran index hingga 90% dengan membuat index khusus untuk baris yang belum selesai diproses saja.",
+                'content_en' => "When dealing with millions of relational records in PostgreSQL, slow query performance is almost always caused by unnecessary sequential table scans. This article explores composite B-Tree design, partial indexing for state columns, and GIN/GIST indexing for JSONB documents.\n\n### 1. Composite B-Tree Indexing\nColumn ordering within composite indexes matters. Always prioritize columns with high cardinality or those most frequently evaluated in equality WHERE filters.\n\n### 2. Partial Indexing\nIf your table tracks processing states ('pending', 'processed', 'failed'), you can save up to 90% in index overhead by only indexing rows matching specific conditions.",
+                'status' => 'published',
+                'published_at' => now()->subDays(5),
+            ]
+        );
+        $post1->categories()->sync([$catDb->id]);
+
+        $post2 = Post::firstOrCreate(
+            ['slug' => 'designing-idempotent-webhook-handlers-with-zero-data-loss'],
+            [
+                'title_id' => 'Merancang Penanganan Webhook Idempoten Tanpa Kehilangan Data',
+                'title_en' => 'Designing Idempotent Webhook Handlers with Zero Data Loss',
+                'excerpt_id' => 'Penerapan concurrency locks, deduplication keys, dan transactional event dispatchers pada layanan kritis.',
+                'excerpt_en' => 'Implementing robust concurrency locks, deduplication keys, and transactional event dispatchers in mission-critical services.',
+                'content_id' => "Layanan webhook dari payment gateway atau pihak ketiga tidak menjamin pengiriman tepat satu kali (at-most-once). Sering kali terjadi retry otomatis yang memicu duplicate events.\n\n### 1. Idempotency Key & Redis Lock\nGunakan kunci idempoten unik yang disimpan di Redis dengan TTL terukur untuk mencegah proses ganda pada transaksi finansial.\n\n### 2. Database Transactional Outbox\nSimpan payload webhook ke dalam database terlebih dahulu sebelum memicu proses background queue untuk menjamin tidak ada data yang hilang saat worker restart.",
+                'content_en' => "Third-party webhook providers cannot guarantee single delivery. Network partitions and automated retries inevitably trigger duplicate events.\n\n### 1. Idempotency Keys & Distributed Locks\nEnforce unique idempotency tokens stored with atomic lock semantics to protect financial mutations from double charging.\n\n### 2. Transactional Outbox Pattern\nPersist incoming webhook payloads to your database before queue dispatching, ensuring zero data loss during broker crashes.",
+                'status' => 'published',
+                'published_at' => now()->subDays(2),
+            ]
+        );
+        $post2->categories()->sync([$catArch->id]);
     }
 }

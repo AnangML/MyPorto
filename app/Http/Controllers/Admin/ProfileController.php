@@ -37,6 +37,7 @@ class ProfileController extends Controller
             'bio_en' => ['required', 'string'],
             'location' => ['nullable', 'string', 'max:255'],
             'email_public' => ['nullable', 'email', 'max:255'],
+            'whatsapp' => ['nullable', 'string', 'max:50'],
             'github_url' => ['nullable', 'url', 'max:255'],
             'linkedin_url' => ['nullable', 'url', 'max:255'],
             'availability_status' => ['nullable', 'boolean'],
@@ -79,6 +80,13 @@ class ProfileController extends Controller
         }
 
         unset($validated['cv_file']);
+
+        if ($request->has('whatsapp')) {
+            $meta = $profile->meta ?? [];
+            $meta['whatsapp'] = $request->input('whatsapp');
+            $profile->meta = $meta;
+        }
+        unset($validated['whatsapp']);
 
         $profile->fill($validated);
         $profile->save();

@@ -40,7 +40,7 @@ class TrainingManagementTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Seminar &amp; Pelatihan', false);
-        $response->assertSee('Pelatihan Arsitektur Enterprise Backend');
+        $response->assertSee('Sertifikasi Kompetensi Pemrogram');
         $response->assertSee('Networking');
         $response->assertSee('DKI Jakarta');
     }
@@ -183,4 +183,3 @@ class TrainingManagementTest extends TestCase
         $this->assertDatabaseMissing('trainings', ['id' => $id]);
     }
 }
-

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
@@ -79,5 +80,47 @@ class Project extends Model
         $locale = App::getLocale();
 
         return $this->{"role_{$locale}"} ?? $this->role_en ?? $this->role_id;
+    }
+
+    /**
+     * Get the public URL for the project cover / showcase image.
+     */
+    public function getCoverImageUrlAttribute(): ?string
+    {
+        if ($this->cover_image_path && Storage::disk('public')->exists($this->cover_image_path)) {
+            return Storage::disk('public')->url($this->cover_image_path);
+        }
+
+        return null;
+    }
+
+    /**
+     * Alias for thumbnail path backwards compatibility.
+     */
+    public function getThumbnailPathAttribute(): ?string
+    {
+        return $this->cover_image_path;
+    }
+
+    /**
+     * Get URLs for additional gallery screenshots stored in meta.
+     *
+     * @return array<int, array{path: string, url: string}>
+     */
+    public function getScreenshotsUrlsAttribute(): array
+    {
+        $screenshots = $this->meta['screenshots'] ?? [];
+        $urls = [];
+
+        foreach ($screenshots as $path) {
+            if ($path && Storage::disk('public')->exists($path)) {
+                $urls[] = [
+                    'path' => $path,
+                    'url' => Storage::disk('public')->url($path),
+                ];
+            }
+        }
+
+        return $urls;
     }
 }
