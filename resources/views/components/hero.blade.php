@@ -1,14 +1,14 @@
 @props(['profile' => null])
 
-<section id="home" class="scroll-mt-24 px-2 sm:px-6 lg:px-8 pt-8 sm:pt-14 pb-12 lg:pb-20 relative overflow-hidden">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+<section id="home" class="scroll-mt-24 w-full pt-20 sm:pt-24 pb-6 sm:pb-8 lg:min-h-screen flex items-center relative">
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         
         <!-- Left Column: Copy & CTAs -->
-        <div class="lg:col-span-7 flex flex-col items-start gap-6 sm:gap-7 z-10 reveal-on-scroll">
+        <div class="lg:col-span-7 flex flex-col items-start gap-4 sm:gap-5 z-10 reveal-on-scroll">
             
             <!-- Availability Pill Badge (Soft Blue Tech Accent) -->
             @if(!isset($profile) || $profile?->availability_status)
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/80 text-xs font-medium text-blue-700 dark:text-blue-300 tracking-wide shadow-xs">
+                <div class="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/80 text-[11px] sm:text-xs font-medium text-blue-700 dark:text-blue-300 tracking-wide shadow-xs">
                     <svg class="w-3.5 h-3.5 text-blue-600 dark:text-sky-400 fill-current animate-pulse" viewBox="0 0 24 24">
                         <path d="M12 2l2.4 7.2h7.6l-6.1 4.5 2.3 7.3-6.2-4.6-6.2 4.6 2.3-7.3-6.1-4.5h7.6z"/>
                     </svg>
@@ -17,25 +17,25 @@
             @endif
 
             <!-- Main Editorial Headline with Vibrant Blue Serif Accent -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] leading-[1.08] max-w-xl">
+            <h1 class="text-3xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] leading-[1.1] max-w-xl">
                 {{ __('portfolio.hero.headline_prefix') }}
                 <span class="block">
                     {{ __('portfolio.hero.headline_middle') }}
-                    <span class="font-serif-accent italic font-normal text-blue-600 dark:text-sky-400 text-5xl sm:text-7xl lg:text-8xl tracking-normal inline-block ml-1">
+                    <span class="font-serif-accent italic font-normal text-blue-600 dark:text-sky-400 text-4xl sm:text-6xl lg:text-6xl xl:text-7xl tracking-normal inline-block ml-1">
                         {{ __('portfolio.hero.headline_accent') }}
                     </span>
                 </span>
             </h1>
 
             <!-- Bio Subtitle (Dynamic from DB with fallback) -->
-            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+            <p class="text-xs sm:text-sm lg:text-[13px] xl:text-sm text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
                 {{ $profile?->bio ?: __('portfolio.hero.bio') }}
             </p>
 
-            <!-- Action Buttons Group (Matches Reference: Solid Primary + Outline Secondary) -->
-            <div class="flex flex-wrap items-center gap-4 pt-2">
+            <!-- Action Buttons Group -->
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-1">
                 <!-- Primary CTA (Black/Deep Slate with smooth hover) -->
-                <a href="#work" class="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-2xl bg-[#0F172A] hover:bg-blue-600 dark:bg-white dark:hover:bg-blue-500 text-white dark:text-[#0F172A] dark:hover:text-white font-medium text-sm shadow-[0_12px_24px_rgba(15,23,42,0.18)] dark:shadow-none hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 group">
+                <a href="#work" class="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-2xl bg-[#0F172A] hover:bg-blue-600 dark:bg-white dark:hover:bg-blue-500 text-white dark:text-[#0F172A] dark:hover:text-white font-medium text-xs sm:text-sm shadow-[0_10px_20px_rgba(15,23,42,0.15)] dark:shadow-none hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 group">
                     <span>{{ __('portfolio.hero.cta_work') }}</span>
                     <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M7 17L17 7M17 7H7M17 7V17" />
@@ -43,7 +43,7 @@
                 </a>
 
                 <!-- Secondary CTA (Clean Outline Button) -->
-                <a href="#contact" class="inline-flex items-center gap-2 px-6 sm:px-7 py-3.5 rounded-2xl bg-white dark:bg-[#1E293B]/80 border border-slate-200 dark:border-slate-700 text-[#0F172A] dark:text-[#F8FAFC] font-medium text-sm hover:border-blue-400 dark:hover:border-blue-500 hover:bg-slate-50 dark:hover:bg-[#283548] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-xs">
+                <a href="#contact" class="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-2xl bg-white dark:bg-[#1E293B]/80 border border-slate-200 dark:border-slate-700 text-[#0F172A] dark:text-[#F8FAFC] font-medium text-xs sm:text-sm hover:border-blue-400 dark:hover:border-blue-500 hover:bg-slate-50 dark:hover:bg-[#283548] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-xs">
                     <span>{{ __('portfolio.hero.cta_talk') }}</span>
                     <svg class="w-4 h-4 text-slate-500 dark:text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -52,7 +52,7 @@
             </div>
 
             <!-- Tech Badges / Stack Info -->
-            <div class="flex items-center gap-4 pt-4 text-xs text-slate-500 dark:text-slate-400 font-mono">
+            <div class="flex items-center gap-3 pt-2 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono">
                 <span class="flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                     Laravel 12 / PHP 8.3
@@ -70,28 +70,21 @@
             </div>
         </div>
 
-        <!-- Right Column: Clean Monochrome Portrait with Radiant Blue Edge Aura -->
+        <!-- Right Column: Frameless Portrait (Transparent PNG friendly with zero box/border) -->
         <div class="lg:col-span-5 relative flex justify-center lg:justify-end reveal-on-scroll">
             
-            <!-- Radiant Soft Blue & Sky Aura on the Right Edge of the Photo (z-0 so it's visibly glowing around the frame) -->
-            <div class="pointer-events-none absolute -right-6 -top-6 w-[420px] h-[500px] bg-gradient-to-bl from-blue-500/30 via-sky-400/25 to-blue-300/10 dark:from-blue-500/40 dark:via-sky-400/30 dark:to-transparent rounded-full blur-3xl z-0"></div>
-            <div class="pointer-events-none absolute right-4 top-8 w-80 h-96 bg-blue-400/25 dark:bg-sky-400/25 rounded-full blur-2xl z-0"></div>
+            <div class="relative flex items-center justify-center">
+                <!-- Soft Ambient Blue Glow Behind Subject (No box, no borders) -->
+                <div class="pointer-events-none absolute inset-0 -m-6 sm:-m-10 bg-blue-500/20 dark:bg-blue-500/25 rounded-full blur-2xl sm:blur-3xl -z-10"></div>
+                <div class="pointer-events-none absolute inset-0 -m-2 sm:-m-4 bg-sky-400/15 dark:bg-sky-400/20 rounded-full blur-xl -z-10"></div>
 
-            <div class="relative z-10 w-full max-w-sm sm:max-w-md lg:max-w-none aspect-[4/5] sm:aspect-[3/4] rounded-2xl overflow-hidden flex items-end justify-center shadow-[0_0_40px_rgba(37,99,235,0.15)] dark:shadow-[0_0_50px_rgba(56,189,248,0.2)]">
-                
-                <!-- Portrait Image with Blue Edge Aura -->
+                <!-- Frameless Image (Transparent PNG displays floating naturally without background box or border) -->
                 <img 
                     src="{{ $profile?->profile_photo_url ?? asset('images/portrait.jpg') }}" 
                     alt="{{ $profile?->display_name ?? 'Anang Muhamad Lutfi' }} - Portrait" 
-                    class="w-full h-full object-cover object-top contrast-[1.04] transition-all duration-700 fade-bottom-mask"
+                    class="relative z-10 max-h-[48vh] sm:max-h-[56vh] lg:max-h-[490px] w-auto max-w-[280px] sm:max-w-sm lg:max-w-[380px] object-contain drop-shadow-[0_15px_30px_rgba(37,99,235,0.18)] dark:drop-shadow-[0_15px_35px_rgba(56,189,248,0.22)] transition-transform duration-500 hover:scale-[1.02]"
                     loading="eager"
                 />
-
-                <!-- Bottom Gradient Fade Layer (Blends smoothly into pure white background) -->
-                <div class="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#0A0F1D] dark:via-[#0A0F1D]/80 dark:to-transparent"></div>
-                
-                <!-- Subtle Side Vignette (Left edge blend) -->
-                <div class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white/90 dark:from-[#0A0F1D]/90 to-transparent"></div>
             </div>
         </div>
     </div>

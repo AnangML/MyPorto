@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -82,21 +82,17 @@
         }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0A0F1D] min-h-screen text-[#0F172A] dark:text-[#F8FAFC] font-sans antialiased selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300 transition-colors duration-300">
+<body class="bg-white dark:bg-[#0A0F1D] min-h-screen text-[#0F172A] dark:text-[#F8FAFC] font-sans antialiased overflow-x-hidden max-w-full relative selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300 transition-colors duration-300">
     
-    <!-- Full Width Seamless White Container -->
-    <div class="max-w-[1300px] mx-auto min-h-screen flex flex-col justify-between relative px-4 sm:px-8 lg:px-12 bg-white dark:bg-[#0A0F1D]">
-        
-        <!-- Ambient Subtle Sky Glow Behind Hero -->
-        <div class="pointer-events-none absolute -top-32 -right-32 w-96 h-96 bg-blue-50/70 dark:bg-blue-900/15 rounded-full blur-3xl -z-10"></div>
-        <div class="pointer-events-none absolute top-1/3 -left-32 w-80 h-80 bg-sky-50/50 dark:bg-sky-950/20 rounded-full blur-3xl -z-10"></div>
+    <!-- Full Width Seamless Container -->
+    <div class="max-w-7xl mx-auto min-h-screen flex flex-col justify-between relative px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#0A0F1D]">
 
         <div>
             <!-- Top Centered Navigation Bar -->
             <x-navbar />
 
             <!-- Page Content -->
-            <main>
+            <main class="w-full">
                 {{ $slot }}
             </main>
         </div>

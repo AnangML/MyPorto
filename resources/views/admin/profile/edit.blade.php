@@ -70,10 +70,10 @@
                         <div class="w-28 h-36 rounded-2xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 shadow-sm bg-slate-100 dark:bg-slate-900 flex items-center justify-center group relative">
                             <!-- Show live preview if selected, else current photo -->
                             <template x-if="photoPreview">
-                                <img :src="photoPreview" alt="Preview Foto Baru" class="w-full h-full object-cover object-top">
+                                <img :src="photoPreview" alt="Preview Foto Baru" class="w-full h-full object-contain p-1">
                             </template>
                             <template x-if="!photoPreview">
-                                <img src="{{ $profile->profile_photo_url }}" alt="Foto Profil" class="w-full h-full object-cover object-top">
+                                <img src="{{ $profile->profile_photo_url }}" alt="Foto Profil" class="w-full h-full object-contain p-1">
                             </template>
                         </div>
                         <span x-show="photoPreview" class="absolute -top-2 -right-2 px-2 py-0.5 rounded-full text-[9px] font-bold bg-blue-600 text-white shadow-xs">

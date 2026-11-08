@@ -1,5 +1,5 @@
 <x-layouts.app :title="$project->title . ' — Anang Muhamad Lutfi'">
-    <article class="px-2 sm:px-6 lg:px-8 py-8 sm:py-12 max-w-4xl mx-auto">
+    <article class="px-2 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-12 max-w-4xl mx-auto">
         
         <!-- Navigation Back Link -->
         <div class="mb-8">

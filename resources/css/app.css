@@ -39,10 +39,23 @@
     html {
         scroll-behavior: smooth;
         background-color: #FFFFFF;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        overscroll-behavior-x: none;
     }
 
     html.dark {
         background-color: #0A0F1D;
+    }
+
+    body {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        overscroll-behavior-x: none;
+        touch-action: pan-y;
+        position: relative;
     }
 
     @media (prefers-reduced-motion: reduce) {

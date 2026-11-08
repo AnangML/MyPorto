@@ -1,5 +1,5 @@
-<header class="pt-6 sm:pt-8 px-4 sm:px-8 flex justify-center sticky top-0 z-50">
-    <nav class="backdrop-blur-md bg-white/85 dark:bg-[#1E293B]/90 border border-slate-200/80 dark:border-slate-700/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] dark:shadow-none rounded-full px-3 py-2 sm:px-4 sm:py-2 flex items-center justify-between sm:justify-center gap-2 sm:gap-4 transition-all duration-200">
+<header class="fixed top-0 inset-x-0 z-50 pt-3 sm:pt-4 px-4 sm:px-8 flex justify-center pointer-events-none">
+    <nav class="pointer-events-auto backdrop-blur-md bg-white/85 dark:bg-[#1E293B]/90 border border-slate-200/80 dark:border-slate-700/80 shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:shadow-none rounded-full px-3 py-2 sm:px-4 sm:py-2 flex items-center justify-between sm:justify-center gap-2 sm:gap-4 transition-all duration-200">
         
         <!-- Monogram / Initial Badge -->
         <a href="{{ route('home') }}#home" data-target="home" class="nav-anchor w-8 h-8 rounded-full bg-[#0F172A] dark:bg-white text-white dark:text-[#0F172A] flex items-center justify-center font-bold text-xs tracking-wider transition-transform hover:scale-105 shadow-sm shrink-0" title="Anang Muhamad Lutfi">
@@ -62,7 +62,7 @@
 </header>
 
 <!-- Mobile Menu Drawer -->
-<div id="mobile-menu" class="hidden sm:hidden fixed inset-x-4 top-20 z-40 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-4 transition-all duration-300">
+<div id="mobile-menu" class="hidden sm:hidden fixed inset-x-4 top-16 z-50 bg-white/95 dark:bg-[#1E293B]/95 backdrop-blur-lg border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-4 transition-all duration-300">
     <div class="flex flex-col gap-1.5 text-sm font-medium">
         <a href="{{ route('home') }}#home" data-target="home" class="mobile-spy-link nav-anchor px-3.5 py-2.5 rounded-xl transition-all duration-200 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-sky-400 font-semibold border-l-4 border-blue-600">
             {{ __('portfolio.nav.home') }}
