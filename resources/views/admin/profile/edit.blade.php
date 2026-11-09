@@ -149,7 +149,7 @@
                             id="email_public" 
                             name="email_public" 
                             value="{{ old('email_public', $profile->email_public) }}" 
-                            placeholder="ananglutfi2003@gmail.com"
+                            placeholder="developer@example.com"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                     </div>
@@ -165,7 +165,7 @@
                             id="whatsapp" 
                             name="whatsapp" 
                             value="{{ old('whatsapp', $profile->meta['whatsapp'] ?? '') }}" 
-                            placeholder="082121830454"
+                            placeholder="081234567890"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-[#0F172A] text-slate-900 dark:text-white text-xs focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                     </div>

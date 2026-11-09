@@ -1,19 +1,20 @@
 # 🚀 Anang Muhamad Lutfi — Personal Developer Portfolio & Admin CMS
 
-![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-12.x%20%7C%2013.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Alpine.js](https://img.shields.io/badge/Alpine.js-v3-8BC0D0?style=for-the-badge&logo=alpinedotjs&logoColor=white)
-![Tests](https://img.shields.io/badge/Tests-40%20Passed%20(100%25)-10B981?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-59%20Passed%20(100%25)-10B981?style=for-the-badge&logo=phpunit&logoColor=white)
+![Code Style](https://img.shields.io/badge/Code_Style-PSR--12%20(Pint)-blue?style=for-the-badge&logo=php&logoColor=white)
 
-Portofolio web profesional modern dan mesin CMS kustom berkecepatan tinggi yang dirancang untuk **Anang Muhamad Lutfi** (Backend & Web Developer). Dibangun dengan arsitektur tangguh berbasis **Laravel 12**, **PostgreSQL**, **Tailwind CSS v4**, dan **Alpine.js**.
+Portofolio web profesional modern dan mesin CMS kustom berkecepatan tinggi yang dirancang untuk **Anang Muhamad Lutfi** (Backend & Full-Stack Web Developer). Dibangun dengan arsitektur tangguh berbasis **Laravel**, **PostgreSQL**, **Tailwind CSS v4**, dan **Alpine.js**.
 
 ---
 
 ## 📖 Ringkasan Proyek
 
-Platform ini dirancang khusus untuk mempublikasikan proyek rekayasa perangkat lunak, studi kasus arsitektur backend, matriks keahlian teknis, riwayat pengalaman karier, sertifikasi kompetensi, serta keikutsertaan seminar/pelatihan IT. 
+Platform ini dirancang khusus untuk mempublikasikan proyek rekayasa perangkat lunak berskala produksi, studi kasus arsitektur backend transaksi tinggi, matriks keahlian teknis (*Technical Matrix*), riwayat pengalaman karier, sertifikasi kompetensi resmi BNSP, serta keikutsertaan seminar/pelatihan IT terverifikasi.
 
 Dilengkapi dengan **Custom Admin CMS** independen yang elegan, cepat, dan aman, memungkinkan pemilik portofolio mengelola seluruh data secara mandiri tanpa perlu mengubah baris kode apa pun.
 
@@ -22,27 +23,65 @@ Dilengkapi dengan **Custom Admin CMS** independen yang elegan, cepat, dan aman, 
 - **Vibrant Royal Blue Accent**: Aksen biru teknologi `#2563EB` yang tajam dan presisi.
 - **Tipografi Editorial**: Kombinasi sans-serif geometris modern (*Plus Jakarta Sans*), font monospace (*JetBrains Mono*), dan sentuhan kursif berkelas (*Instrument Serif*).
 - **Floating Pill Navigation**: Navbar kapsul mengambang dengan fitur *active scrollspy* responsif dan transisi halus.
-- **Radiant Ambient Glow**: Efek pendaran cahaya biru lembut pada foto portrait monokrom.
+- **Top Reading Scroll Progress Bar**: Garis gradasi neon tipis di puncak browser yang melacak progres membaca secara *real-time* (60–120 FPS).
+- **Staggered Wave Card Animations**: Efek kemunculan kartu-kartu karya, bento skills, dan kredensial secara bergelombang halus (*smooth cubic-bezier*).
+- **Fullscreen Image Lightbox**: Peninjau gambar antarmuka layar penuh (*modal zoom-in*) pada halaman detail studi kasus.
 
 ---
 
-## ✨ Fitur Unggulan
+## 💼 Karya & Proyek Nyata yang Terpasang (Production-Ready Projects)
+
+Portofolio ini menampilkan 4 proyek nyata berbobot arsitektur tinggi lintas domain:
+
+1. **RaiLoka — Sistem Pemesanan Tiket Kereta Api Modern & Concurrency-Safe**
+   - **Arsitektur:** Monorepo (Next.js 15 App Router + Laravel 13 REST API) & PostgreSQL.
+   - **Keunggulan:** Pencegahan *double-booking* tiket dengan transaksi ACID PostgreSQL & row-level locking (`SELECT ... FOR UPDATE`), integrasi payment gateway Midtrans Snap (QRIS, VA Bank, E-Wallet) dengan verifikasi signature SHA-512, Customer Service live chat ditenagai Laravel Reverb (WebSocket), dan validasi boarding pass digital QR Code.
+   - **Repository:** [github.com/AnangML/Railoka](https://github.com/AnangML/Railoka)
+2. **NgemilKukis — Platform E-Commerce Kukis Artisanal & Manajemen Operasional Terpadu**
+   - **Arsitektur:** Laravel Monolith + Blade + Alpine.js + Tailwind CSS v4 (Palet 60-30-10).
+   - **Keunggulan:** Flyout cart drawer tanpa reload, integrasi Xendit Payment Gateway dengan proteksi *Idempotency Key*, sistem loyalitas *Kukis VIP Club* & *Cookie Crumbs* (cashback belanja & point ledger), kontrol akses multi-role (RBAC 4 level), dan Audit Trail (Log Aktivitas) menyeluruh dengan modal diff JSON.
+   - **Repository:** [github.com/AnangML/NgemilKukis](https://github.com/AnangML/NgemilKukis)
+3. **Sistem Manajemen Sertifikasi (Certificate List Management / LSP CELIA)**
+   - **Arsitektur:** Laravel, PostgreSQL, Tailwind CSS.
+   - **Keunggulan:** Platform repositori sertifikat terpusat untuk Lembaga Sertifikasi Profesi (LSP) Universitas Pamulang guna memangkas waktu validasi berkas dan percetakan sertifikat kompetensi mahasiswa.
+4. **Sistem Informasi Posyandu Soka**
+   - **Arsitektur:** Node.js, Express, Web Architecture.
+   - **Keunggulan:** Digitalisasi layanan kesehatan masyarakat Posyandu Soka untuk pendaftaran pasien, pencatatan rekam medis pemeriksaan berkala anak & lansia, serta transparansi laporan kader.
+
+---
+
+## 🏆 Kredensial, Sertifikasi & Pelatihan Terverifikasi
+
+- **3 Sertifikasi Resmi Kompetensi:**
+  1. *Badan Nasional Sertifikasi Profesi (BNSP)* — Pemrogram (Software Developer)
+  2. *Badan Nasional Sertifikasi Profesi (BNSP)* — Network Engineering (Teknik Jaringan Komputer)
+  3. *TOEFL Prediction* — English Language Proficiency
+- **8 Seminar IT Universitas Pamulang:**
+  - AI & Machine Learning, System Analyst, Public Relations for Tech, Pemrograman Terstruktur, dll.
+- **Pendidikan Terverifikasi:**
+  - *Universitas Pamulang* — S1 Teknik Informatika (2022 – Sekarang)
+  - *SMK Negeri 43 Jakarta* — Teknik Komputer dan Jaringan / TKJ (2024 Lulus)
+
+---
+
+## ✨ Fitur Unggulan Sistem
 
 ### 🌐 1. Tampilan Publik (Frontend)
-- **Hero Editorial Section**: Headline dinamis, bio interaktif, status ketersediaan (*Available for new projects*), tag tech stack, dan tombol aksi langsung.
-- **Dukungan Dwibahasa (Bilingual)**: Pengalihan bahasa instan antara **Bahasa Indonesia (`id`)** dan **English (`en`)** dengan fallback aman.
-- **Dark & Light Mode Switcher**: Toggle tema elegan dengan persistensi otomatis di `localStorage`.
-- **Showcase Proyek & Filter Interaktif**: Filter kategori proyek (*Full-Stack*, *Backend API*, *Enterprise App*, dll.) tanpa memuat ulang halaman (*zero page reload*) menggunakan Alpine.js.
-- **Studi Kasus Proyek (`/projects/{slug}`)**: Halaman mendalam membedah latar belakang masalah, arsitektur solusi sistem, stack teknologi yang digunakan, serta tautan ke repositori GitHub dan demo live.
-- **Timeline Riwayat Pengalaman**: Garis waktu profesional menyajikan pengalaman kerja, magang industri, dan pendidikan.
-- **Form Kontak Terproteksi**: Dilengkapi perlindungan anti-bot (*honeypot field*) dan pembatas frekuensi pengiriman pesan (*rate limiter throttle:5,1*).
-- **Akses & Unduh CV Langsung (`/cv`)**: Pengunjung dapat mengunduh berkas Resume/CV PDF resmi terbaru dalam satu klik.
-- **Optimasi SEO & Aksesibilitas**: XML Sitemap dinamis (`/sitemap.xml`), `robots.txt`, dan metadata terstruktur Schema.org `Person` JSON-LD.
+- **Top Reading Scroll Progress Bar**: Garis gradasi neon setinggi 2.5px di posisi `fixed top-0 left-0` yang diperbarui via `requestAnimationFrame` dan *passive listener* tanpa lag.
+- **Staggered "Wave" Reveal**: Seluruh grid kartu (Proyek, Bento Skills, Kredensial, Artikel) muncul bertahap secara berurutan (*stagger delay 50ms – 600ms*) saat pengguna melakukan scroll.
+- **Hero Section Dinamis**: Headline dan bio interaktif dari database, status ketersediaan (*Available for new projects*), tombol CTA langsung, dan unduh CV PDF.
+- **Dukungan Dwibahasa (Bilingual i18n)**: Pengalihan bahasa instan antara **Bahasa Indonesia (`id`)** dan **English (`en`)** dengan fallback aman.
+- **Dark & Light Mode Switcher**: Toggle tema elegan dengan sinkronisasi ke `localStorage`.
+- **Showcase Proyek & Filter Interaktif**: Filter kategori proyek (*Aplikasi Web*, *Full-Stack*, *E-Commerce*) tanpa reload halaman (*zero page reload*) via Alpine.js.
+- **Studi Kasus Proyek (`/projects/{slug}`)**: Membedah latar belakang masalah, arsitektur solusi sistem, stack teknologi yang digunakan, serta tombol peninjau gambar (*Image Lightbox Review Modal*).
+- **Navbar Cerdas**: Otomatis mendeteksi rute aktif dan menyorot menu `Karya` saat pengguna berada di halaman detail proyek.
+- **Form Kontak Simetris & Terproteksi**: Layout form kontak presisi sejajar bawah (`lg:items-end`) dengan kartu kontak langsung, dilengkapi perlindungan anti-bot (*honeypot*) dan pembatas frekuensi (*rate limiter throttle:5,1*).
+- **Optimasi SEO & Aksesibilitas**: XML Sitemap dinamis (`/sitemap.xml`), `robots.txt`, dan metadata terstruktur Schema.org `Person` JSON-LD serta dukungan `prefers-reduced-motion`.
 
 ### 🛡️ 2. Pusat Kendali Admin (Custom CMS `/admin`)
 - **Autentikasi Aman & Brute-Force Protection**: Rute login `/admin/login` dilindungi pembatasan percobaan gagal (*throttle 5 requests per minute*).
 - **Dashboard Overview**: Metrik ringkasan jumlah proyek terbit, keterampilan teknis, pengalaman, seminar/pelatihan, dan notifikasi pesan masuk baru.
-- **Pengaturan Profil & CV**: Edit display name, headline, bio dwibahasa, link media sosial, serta upload dan pergantian berkas CV PDF.
+- **Pengaturan Profil & CV**: Edit display name, headline, bio dwibahasa, link media sosial, serta upload dan pergantian berkas CV PDF resmi.
 - **Manajemen Proyek (Projects CRUD)**: Tambah, edit, dan arsipkan proyek, upload gambar tangkapan layar, multi-kategori, dan multi-teknologi.
 - **Matriks Keahlian (Skills Matrix CRUD)**: Kelola daftar teknologi berdasarkan rumpun (Backend, Frontend, Database, DevOps, Tools) beserta level kemahiran dan status *featured*.
 - **Pengalaman Karier (Experiences CRUD)**: Kelola riwayat karier, peran, deskripsi tugas, dan periode kerja aktif.
@@ -58,13 +97,13 @@ Dilengkapi dengan **Custom Admin CMS** independen yang elegan, cepat, dan aman, 
 
 | Layer | Teknologi | Keterangan |
 |---|---|---|
-| **Backend Framework** | Laravel 12 (v13.x skeleton) | PHP 8.3+ modern framework dengan RESTful controller & Eloquent ORM |
+| **Backend Framework** | Laravel 12 / 13 | PHP 8.3 modern framework dengan RESTful controller & Eloquent ORM |
 | **Database** | PostgreSQL 14+ | Relational database performa tinggi dengan indeks komposit teroptimasi |
 | **Frontend Styling** | Tailwind CSS v4 | Engine CSS generasi terbaru berbasis `@tailwindcss/vite` |
-| **Frontend Reactivity** | Alpine.js v3 | State management ringan untuk filter kategori, modal, dan cascading dropdown |
+| **Frontend Reactivity** | Alpine.js v3 | State management ringan untuk filter kategori, modal lightbox, dan interaktivitas |
 | **Asset Bundler** | Vite 8 | Kompilasi aset ultra-cepat dengan Hot Module Replacement (HMR) |
 | **Tipografi** | Plus Jakarta Sans & Instrument Serif | Google Web Fonts untuk estetika minimalis modern |
-| **Testing** | PHPUnit 12 | 40 Feature & Unit tests dengan 173 assertions (100% passing) |
+| **Testing** | PHPUnit 12 | **59 Feature & Unit tests dengan 280 assertions (100% passing)** |
 | **Code Formatter** | Laravel Pint | Standardisasi kode PHP PSR-12 |
 
 ---
@@ -122,7 +161,7 @@ php artisan storage:link
 ```
 
 ### 5. Jalankan Database Migration & Seeder
-Perintah ini akan membuat 13 tabel dan mengisinya dengan data portofolio awal Anang Muhamad Lutfi beserta akun Administrator:
+Perintah ini akan membuat skema tabel dan mengisinya dengan data portofolio nyata Anang Muhamad Lutfi beserta akun Administrator:
 ```bash
 php artisan migrate --seed
 ```
@@ -132,13 +171,13 @@ php artisan migrate --seed
 npm install
 npm run build
 ```
-*(Catatan untuk pengguna Windows PowerShell: jika terdapat kebijakan eksekusi skrip, jalankan `npm.cmd run build` atau `npm.cmd run dev`).*
+*(Catatan untuk lingkungan pengembangan lokal: jalankan `npm run dev` atau `npm.cmd run dev` untuk mengaktifkan Hot Module Replacement).*
 
 ### 7. Jalankan Server Pengembangan
 ```bash
 php artisan serve
 ```
-Aplikasi kini dapat diakses melalui peramban web di: **`http://localhost:8000`** (atau via Laragon/Valet di **`http://myporto.test`**).
+Aplikasi kini dapat diakses melalui peramban web di: **`http://localhost:8000`** (atau via Laragon/Nginx di **`http://myporto.test`**).
 
 ---
 
@@ -157,7 +196,7 @@ Setelah menjalankan migrasi dan seeder, Anda dapat masuk ke panel Admin CMS:
 
 ## 🧪 Pengujian & Kualitas Kode
 
-Proyek ini dilengkapi pengujian otomatis (*automated feature testing*) yang mencakup alur publik, pengunduhan CV, pengiriman formulir kontak, rate-limiting, autentikasi admin, dan modul CRUD:
+Proyek ini dilengkapi pengujian otomatis menyeluruh (*automated testing*) dengan tingkat kelulusan 100%:
 
 ### Menjalankan Seluruh Automated Test
 ```bash
@@ -166,7 +205,7 @@ php artisan test
 
 ### Menjalankan Test Spesifik
 ```bash
-# Uji Fitur Publik (Hero, Portfolio, Detail, Contact, CV)
+# Uji Fitur Publik (Hero, Portfolio, Detail, Contact, CV, Navbar)
 php artisan test tests/Feature/PublicPortfolioTest.php
 
 # Uji Panel CMS Admin (Login, Projects, Skills, Experiences, Messages)
@@ -175,7 +214,7 @@ php artisan test tests/Feature/AdminPanelTest.php
 # Uji Modul Seminar & Pelatihan IT (Cascading Wilayah & Sub Kejuruan)
 php artisan test tests/Feature/TrainingManagementTest.php
 
-# Uji Kualitas Sistem (Sitemap, Robots.txt, Error Pages 404/403/500, JSON-LD)
+# Uji Kualitas Sistem (Sitemap, Robots.txt, Error Pages 404/403/500, JSON-LD, Security)
 php artisan test tests/Feature/QualityAssuranceTest.php
 ```
 
@@ -197,40 +236,30 @@ MyPorto/
 │   │   │   ├── ContactController.php   # Form kontak publik dengan proteksi Honeypot & Throttle
 │   │   │   ├── HomeController.php      # Landing page publik & showcase
 │   │   │   └── ProjectController.php   # Detail studi kasus proyek
-│   ├── Models/                         # Eloquent Models (Project, Skill, Experience, Training, dll.)
+│   │   └── Requests/                   # Dedicated Form Requests (StoreContactRequest)
+│   ├── Models/                         # Eloquent Models (Project, Skill, Experience, Training, ProfileSetting, dll.)
 │   └── Services/
 │       └── IndonesiaRegionService.php  # Dataset resmi 38 Provinsi & 514 Kota/Kabupaten Kemendagri
 ├── database/
-│   ├── migrations/                     # 13 Skema tabel PostgreSQL
-│   └── seeders/                        # PortfolioSeeder & TrainingSeeder
+│   ├── migrations/                     # Skema tabel PostgreSQL terindeks
+│   └── seeders/                        # PortfolioSeeder & TrainingSeeder (Idempotent)
 ├── public/
 │   ├── data/
 │   │   └── indonesia-regions.json      # Dataset wilayah Indonesia untuk dropdown instan
-│   └── images/                         # Aset gambar portrait & thumbnail
+│   └── storage/projects/               # Cover & tangkapan layar proyek nyata
 ├── resources/
 │   ├── css/app.css                     # Tailwind CSS v4 source
 │   ├── js/app.js                       # Alpine.js & client scripts
 │   └── views/
 │       ├── admin/                      # Template Blade panel CMS
 │       ├── components/                 # Blade components (layouts, navbar, footer, hero, cards)
+│       ├── projects/                   # Halaman detail studi kasus & modal lightbox
 │       └── errors/                     # Halaman kustom 404, 403, 500
 ├── routes/
 │   └── web.php                         # Rute publik & rute admin terproteksi
 └── tests/
-    └── Feature/                        # Test suite pengujian otomatis
+    └── Feature/                        # Test suite pengujian otomatis (59 Tests, 280 Assertions)
 ```
-
----
-
-## 📚 Dokumentasi Rujukan
-
-Dokumentasi spesifikasi teknis lengkap tersedia di direktori [`docs/`](file:///d:/laragon/www/MyPorto/docs):
-- [`01_PROJECT_OVERVIEW.md`](file:///d:/laragon/www/MyPorto/docs/01_PROJECT_OVERVIEW.md) — Visi produk & ruang lingkup.
-- [`04_SYSTEM_ARCHITECTURE.md`](file:///d:/laragon/www/MyPorto/docs/04_SYSTEM_ARCHITECTURE.md) — Arsitektur sistem backend & basis data.
-- [`05_DATABASE_SCHEMA.md`](file:///d:/laragon/www/MyPorto/docs/05_DATABASE_SCHEMA.md) — Rancangan skema database PostgreSQL.
-- [`06_DESIGN_SYSTEM.md`](file:///d:/laragon/www/MyPorto/docs/06_DESIGN_SYSTEM.md) — Token desain, warna `#2563EB`, dan tipografi.
-- [`10_TASK_BREAKDOWN.md`](file:///d:/laragon/www/MyPorto/docs/10_TASK_BREAKDOWN.md) — Rencana tahapan pengerjaan (Phase 0–6).
-- [`14_SECURITY_PRIVACY.md`](file:///d:/laragon/www/MyPorto/docs/14_SECURITY_PRIVACY.md) — Kebijakan keamanan, honeypot, dan proteksi privasi.
 
 ---
 

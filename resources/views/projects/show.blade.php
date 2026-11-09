@@ -212,9 +212,9 @@
                     Explore More Work
                 </h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 reveal-stagger-group">
                     @foreach($relatedProjects as $rel)
-                        <a href="{{ route('projects.show', $rel->slug) }}" class="group p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition-all hover:-translate-y-1 block shadow-xs">
+                        <a href="{{ route('projects.show', $rel->slug) }}" class="group stagger-item p-5 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition-all hover:-translate-y-1 block shadow-xs">
                             <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-medium">
                                 {{ $rel->categories->first()?->name ?? 'Project' }}
                             </span>

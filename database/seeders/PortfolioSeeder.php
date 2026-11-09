@@ -41,7 +41,7 @@ class PortfolioSeeder extends Seeder
                 'bio_id' => 'Saya adalah Backend & Web Developer dengan latar belakang Teknik Informatika di Universitas Pamulang. Berfokus pada perancangan sistem web performa tinggi, RESTful API yang aman, arsitektur database PostgreSQL yang terukur, dan rekayasa perangkat lunak modern.',
                 'bio_en' => 'I am a Backend & Web Developer with an Informatics background from Universitas Pamulang. Focused on designing high-performance web systems, secure RESTful APIs, scalable PostgreSQL database architectures, and modern software engineering.',
                 'location' => 'Tangerang Selatan, Indonesia',
-                'email_public' => 'ananglutfi2003@gmail.com',
+                'email_public' => 'developer@example.com',
                 'github_url' => 'https://github.com/AnangML',
                 'linkedin_url' => 'https://linkedin.com/in/anang-muhamad-lutfi',
                 'availability_status' => true,
@@ -50,7 +50,7 @@ class PortfolioSeeder extends Seeder
                 'seo_description_id' => 'Portofolio profesional Anang Muhamad Lutfi, Backend & Web Developer Indonesia.',
                 'seo_description_en' => 'Professional portfolio of Anang Muhamad Lutfi, Backend & Web Developer based in Indonesia.',
                 'meta' => [
-                    'whatsapp' => '082121830454',
+                    'whatsapp' => '081234567890',
                     'education' => 'Universitas Pamulang - Teknik Informatika (Lulus 2026)',
                     'primary_stack' => ['PHP', 'Laravel', 'PostgreSQL', 'Tailwind CSS'],
                 ],
@@ -73,17 +73,27 @@ class PortfolioSeeder extends Seeder
             ['name_id' => 'Full-Stack', 'name_en' => 'Full-Stack Systems', 'sort_order' => 3]
         );
 
+        $catEcommerce = ProjectCategory::firstOrCreate(
+            ['slug' => 'ecommerce'],
+            ['name_id' => 'E-Commerce', 'name_en' => 'E-Commerce', 'sort_order' => 4]
+        );
+
         // 4. Technologies
         $techs = [
             'php' => Technology::firstOrCreate(['slug' => 'php'], ['name' => 'PHP 8.3', 'icon_key' => 'php']),
-            'laravel' => Technology::firstOrCreate(['slug' => 'laravel'], ['name' => 'Laravel 12', 'icon_key' => 'laravel']),
+            'laravel' => Technology::firstOrCreate(['slug' => 'laravel'], ['name' => 'Laravel 13', 'icon_key' => 'laravel']),
             'pgsql' => Technology::firstOrCreate(['slug' => 'postgresql'], ['name' => 'PostgreSQL', 'icon_key' => 'postgresql']),
             'mysql' => Technology::firstOrCreate(['slug' => 'mysql'], ['name' => 'MySQL', 'icon_key' => 'mysql']),
             'tailwind' => Technology::firstOrCreate(['slug' => 'tailwind-css'], ['name' => 'Tailwind CSS', 'icon_key' => 'tailwind']),
             'alpine' => Technology::firstOrCreate(['slug' => 'alpine-js'], ['name' => 'Alpine.js', 'icon_key' => 'alpinejs']),
             'rest' => Technology::firstOrCreate(['slug' => 'restful-api'], ['name' => 'RESTful API', 'icon_key' => 'api']),
             'git' => Technology::firstOrCreate(['slug' => 'git'], ['name' => 'Git & GitHub', 'icon_key' => 'git']),
-            'nodejs' => Technology::firstOrCreate(['slug' => 'node-js'], ['name' => 'Node.js', 'icon_key' => 'nodejs']),
+            'nodejs' => Technology::firstOrCreate(['slug' => 'nodejs'], ['name' => 'Node.js', 'icon_key' => 'nodejs']),
+            'nextjs' => Technology::firstOrCreate(['slug' => 'nextjs'], ['name' => 'Next.js 15', 'icon_key' => 'nextjs']),
+            'typescript' => Technology::firstOrCreate(['slug' => 'typescript'], ['name' => 'TypeScript', 'icon_key' => 'typescript']),
+            'midtrans' => Technology::firstOrCreate(['slug' => 'midtrans'], ['name' => 'Midtrans Payment Gateway', 'icon_key' => 'payment']),
+            'xendit' => Technology::firstOrCreate(['slug' => 'xendit'], ['name' => 'Xendit Payment Gateway', 'icon_key' => 'payment']),
+            'reverb' => Technology::firstOrCreate(['slug' => 'laravel-reverb'], ['name' => 'Laravel Reverb (WebSocket)', 'icon_key' => 'websocket']),
         ];
 
         // 5. Featured Projects
@@ -132,6 +142,68 @@ class PortfolioSeeder extends Seeder
         );
         $p2->categories()->sync([$catWeb->id]);
         $p2->technologies()->sync([$techs['nodejs']->id]);
+
+        $p3 = Project::updateOrCreate(
+            ['slug' => 'railoka-train-ticket-booking-system'],
+            [
+                'title_id' => 'RaiLoka — Sistem Pemesanan Tiket Kereta Api Modern & Concurrency-Safe',
+                'title_en' => 'RaiLoka — Modern Train Ticket Booking & Concurrency-Safe Platform',
+                'summary_id' => 'Platform pemesanan tiket kereta api antarkota berarsitektur Monorepo (Next.js 15 + Laravel 13) dengan mekanisme locking database anti double-booking, pembayaran Midtrans Snap, dan live chat WebSocket.',
+                'summary_en' => 'An enterprise monorepo train ticketing platform (Next.js 15 + Laravel 13) featuring ACID concurrency-safe seat locking, Midtrans Snap payments, and real-time WebSocket live chat.',
+                'description_id' => "RaiLoka adalah platform pemesanan tiket kereta api antarkota modern berskala enterprise yang mengintegrasikan web client berkecepatan tinggi dengan backend transaksi berkeandalan tinggi (concurrency-safe).\n\n### Masalah Utama yang Diselesaikan:\n1. **Pencegahan Double-Booking Kursi Kereta:**\n   Menggunakan transaksi ACID PostgreSQL dengan mekanisme row-level locking (`SELECT ... FOR UPDATE`) dan batas waktu kuncian sementara (*temporary seat hold* 15 menit), menjamin tidak akan ada perebutan tiket ganda bahkan dalam lonjakan trafik flash-sale.\n2. **Pembayaran Ganda & Idempotensi Finansial:**\n   Integrasi payment gateway Midtrans Snap (QRIS, Virtual Account, E-Wallet) dengan verifikasi signature SHA-512 wajib dan penanganan webhook yang idempoten untuk menjamin nol kehilangan data (zero data loss). Dilengkapi sistem dompet internal (Railoka Wallet) untuk pembayaran instan dan penampung refund otomatis.\n3. **Layanan Pelanggan Real-Time (WebSocket):**\n   Fitur Customer Service Live Chat ditenagai Laravel Reverb yang memungkinkan interaksi sub-detik, melampirkan tiket aktif, dan memfasilitasi pembatalan tiket langsung dari dalam obrolan.\n4. **Validasi Boarding Tanpa Kertas:**\n   Penerbitan e-ticket dengan QR code digital terenkripsi dan aplikasi scanner kamera stasiun (/staff) untuk validasi tiket cepat di pintu gerbang peron.",
+                'description_en' => "RaiLoka is an enterprise-grade intercity train ticketing platform built with a high-performance monorepo architecture, combining an ultra-fast client interface with a mission-critical, concurrency-safe transactional backend.\n\n### Key Engineering Highlights & Problem Solutions:\n1. **Zero Double-Booking Seat Concurrency:**\n   Powered by PostgreSQL ACID transactions and row-level locking (`SELECT ... FOR UPDATE`) coupled with a 15-minute temporary seat hold expiration, preventing seat collisions during high-traffic ticketing surges.\n2. **Dual Payments & Idempotent Financial Webhooks:**\n   Seamless Midtrans Snap payment gateway integration (QRIS, Bank Virtual Accounts, E-Wallets) enforced with SHA-512 signature authentication and idempotent webhook dispatchers. Supported by internal Railoka Wallet for 1-click checkout and automatic cancellation refunds.\n3. **Sub-Second Real-Time Support (WebSocket):**\n   Full-duplex Customer Service Live Chat built on Laravel Reverb, enabling passengers to attach active tickets and empowering support staff to execute instant ticket cancellations and refunds within the chat interface.\n4. **Paperless Gate Validation:**\n   Encrypted SVG QR-code boarding passes paired with a camera scanner module for station gate attendants.",
+                'role_id' => 'Full-Stack & System Architecture Engineer',
+                'role_en' => 'Full-Stack & System Architecture Engineer',
+                'client_name' => 'Personal Engineering Project (Production-Ready)',
+                'project_url' => null,
+                'repository_url' => 'https://github.com/AnangML/Railoka',
+                'status' => 'published',
+                'is_featured' => true,
+                'sort_order' => 3,
+                'published_at' => now(),
+            ]
+        );
+        $p3->categories()->sync([$catWeb->id, $catFullstack->id]);
+        $p3->technologies()->sync([
+            $techs['nextjs']->id,
+            $techs['typescript']->id,
+            $techs['laravel']->id,
+            $techs['pgsql']->id,
+            $techs['tailwind']->id,
+            $techs['reverb']->id,
+            $techs['midtrans']->id,
+        ]);
+
+        $p4 = Project::updateOrCreate(
+            ['slug' => 'ngemil-kukis-artisan-ecommerce'],
+            [
+                'title_id' => 'NgemilKukis — Platform E-Commerce Kukis Artisanal & Manajemen Operasional Terpadu',
+                'title_en' => 'NgemilKukis — Artisan Soft-Baked Cookies Storefront & E-Commerce Management System',
+                'summary_id' => 'Platform toko online kukis artisanal modern berbasis Laravel dan Tailwind CSS v4, dilengkapi integrasi Xendit Payment Gateway, program loyalitas Cookie Crumbs, RBAC 4 tingkat, serta Audit Trail terpusat.',
+                'summary_en' => 'An artisan soft-baked cookie e-commerce platform built with Laravel and Tailwind CSS v4, featuring Xendit Payment Gateway, Cookie Crumbs loyalty program, 4-tier RBAC, and comprehensive audit trails.',
+                'description_id' => "NgemilKukis adalah platform toko online kukis artisanal (*soft-baked cookies*) modern yang dirancang untuk memberikan pengalaman berbelanja interaktif bagi pelanggan serta sistem manajemen operasional internal yang komprehensif bagi pemilik bisnis, tim dapur, dan customer service.\n\n### Fitur Utama & Keunggulan Rekayasa Sistem:\n1. **Storefront Interaktif & Keranjang Reaktif:**\n   Dibangun menggunakan Blade dan Alpine.js dengan *cart drawer* dinamis tanpa *page reload*, filter katalog kategori instan, serta fitur personalisasi kartu ucapan (*gift card hampers*) untuk berbagai momen spesial.\n2. **Proteksi Finansial & Integrasi Xendit Payment Gateway:**\n   Mendukung metode pembayaran otomatis (QRIS, Bank Virtual Account, E-Wallet) yang diverifikasi melalui webhook aman. Dilengkapi mekanisme **Idempotency Key** pada proses checkout untuk mencegah terjadinya pesanan atau penagihan ganda saat koneksi jaringan tidak stabil, serta simulator pembayaran lokal untuk kemudahan demonstrasi.\n3. **Kukis VIP Club & Program Loyalitas \"Cookie Crumbs\":**\n   Mekanisme gamifikasi dan retensi pelanggan otomatis mencakup diskon member instan Rp 10.000, *cashback point* (1 Crumb per Rp 1.000), penukaran poin saat checkout via slider interaktif (potongan hingga 50%), bonus registrasi awal (+50 Crumbs), dan buku besar transaksi poin (*point ledger*).\n4. **Panel Kontrol Berbasis RBAC 4 Tingkat:**\n   Pemisahan hak akses yang ketat (*permission boundaries*) antara **Super Admin** (kelola metrik, staf, settings, log), **Penjual / Dapur** (kelola pesanan dapur, kurir, dan stok produk), **Customer Service** (layanan komplain & catatan pembeli), serta **Pelanggan**.\n5. **Audit Trail & Log Aktivitas Terpusat:**\n   Pencatatan otomatis seluruh aktivitas sistem penting (*auth, order, catalog, settings, staff*) dilengkapi filter multi-kriteria dan modal visual inspeksi diff data JSON (*before & after state*).\n6. **Estetika Desain & Keandalan Kode:**\n   Menerapkan rasio visual profesional 60-30-10 dengan Tailwind CSS v4 serta diverifikasi dengan **61 automated tests (PHPUnit) dengan tingkat kelulusan 100%**.",
+                'description_en' => "NgemilKukis is a modern artisan soft-baked cookie e-commerce platform engineered to provide a delightful purchasing journey for customers and a comprehensive operational management backoffice for business owners, kitchen sellers, and customer support.\n\n### Key Engineering Highlights & Problem Solutions:\n1. **Interactive Storefront & Reactive Flyout Cart:**\n   Built with Laravel Blade and Alpine.js featuring a zero-reload cart drawer, category search filters, and an interactive greeting card personalization module for gift hampers.\n2. **Financial Protection & Xendit Payment Gateway:**\n   End-to-end integration supporting automated QRIS, Virtual Accounts, and E-Wallets with secure webhook signature validation. Enhanced with an **Idempotency Key** mechanism during checkout to prevent duplicate orders or double billing during network instability, alongside a built-in local payment simulator for testing.\n3. **Kukis VIP Club & \"Cookie Crumbs\" Loyalty Engine:**\n   Customer retention engine featuring automatic member discounts, cashback points (1 Crumb per Rp 1,000 spent), slider-based checkout redemption (up to 50% discount), onboarding bonuses, and a transparent point transaction ledger.\n4. **4-Tier Role-Based Access Control (RBAC):**\n   Strict permission boundaries isolating **Super Admin** (full system metrics, staff management, branding, audit logs), **Seller / Kitchen** (kitchen processing, dispatch & inventory control), **Customer Service** (order notes & inquiries), and **Customers**.\n5. **Centralized Audit Trail & Activity Logging:**\n   Automatic event tracking covering auth, transactions, catalog updates, and staff alterations, complete with multi-criteria filtering and a visual JSON diff inspection modal.\n6. **Design Harmony & Tested Reliability:**\n   Crafted with Tailwind CSS v4 following the 60-30-10 color rule and validated with **61 automated PHPUnit tests with 100% pass rate**.",
+                'role_id' => 'Full-Stack Web Developer & System Designer',
+                'role_en' => 'Full-Stack Web Developer & System Designer',
+                'client_name' => 'Personal Engineering Project (Production-Ready)',
+                'project_url' => null,
+                'repository_url' => 'https://github.com/AnangML/NgemilKukis',
+                'cover_image_path' => 'projects/ngemil-kukis-cover.png',
+                'status' => 'published',
+                'is_featured' => true,
+                'sort_order' => 4,
+                'published_at' => now(),
+            ]
+        );
+        $p4->categories()->sync([$catWeb->id, $catFullstack->id, $catEcommerce->id]);
+        $p4->technologies()->sync([
+            $techs['laravel']->id,
+            $techs['php']->id,
+            $techs['tailwind']->id,
+            $techs['alpine']->id,
+            $techs['xendit']->id,
+            $techs['mysql']->id,
+        ]);
 
         // 6. Skills
         $skills = [

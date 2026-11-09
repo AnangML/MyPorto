@@ -73,8 +73,32 @@
             transform: translateY(0);
         }
 
+        /* Staggered card wave reveal (Point 2) */
+        .reveal-stagger-group .stagger-item {
+            opacity: 0;
+            transform: translateY(22px) scale(0.98);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-stagger-group.is-revealed .stagger-item {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(1) { transition-delay: 50ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(2) { transition-delay: 120ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(3) { transition-delay: 190ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(4) { transition-delay: 260ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(5) { transition-delay: 330ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(6) { transition-delay: 400ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(7) { transition-delay: 470ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(8) { transition-delay: 540ms; }
+        .reveal-stagger-group.is-revealed .stagger-item:nth-child(n+9) { transition-delay: 600ms; }
+
         @media (prefers-reduced-motion: reduce) {
-            .reveal-on-scroll {
+            .reveal-on-scroll,
+            .reveal-stagger-group .stagger-item {
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
@@ -83,6 +107,17 @@
     </style>
 </head>
 <body class="bg-white dark:bg-[#0A0F1D] min-h-screen text-[#0F172A] dark:text-[#F8FAFC] font-sans antialiased overflow-x-hidden max-w-full relative selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300 transition-colors duration-300">
+    
+    <!-- Top Reading Scroll Progress Bar (Point 1) -->
+    <div 
+        id="scroll-progress-bar" 
+        class="fixed top-0 left-0 h-[2.5px] w-0 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-500 z-[100] transition-[width] duration-75 ease-out pointer-events-none shadow-[0_0_10px_rgba(37,99,235,0.7)] dark:shadow-[0_0_12px_rgba(56,189,248,0.8)]"
+        role="progressbar"
+        aria-label="Reading progress"
+        aria-valuenow="0"
+        aria-valuemin="0"
+        aria-valuemax="100"
+    ></div>
     
     <!-- Full Width Seamless Container -->
     <div class="max-w-7xl mx-auto min-h-screen flex flex-col justify-between relative px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#0A0F1D]">
@@ -138,6 +173,29 @@
     <!-- Scroll Reveal & Utility Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Point 1: Top Reading Scroll Progress Bar
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                let ticking = false;
+                const updateProgressBar = () => {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                    ticking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(updateProgressBar);
+                        ticking = true;
+                    }
+                }, { passive: true });
+                updateProgressBar();
+            }
+
+            // Point 2: Staggered Wave & Scroll Reveal Observer
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -146,11 +204,11 @@
                     }
                 });
             }, {
-                threshold: 0.1,
+                threshold: 0.08,
                 rootMargin: '0px 0px -40px 0px'
             });
 
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal-on-scroll, .reveal-stagger-group').forEach(el => observer.observe(el));
         });
 
         function toggleTheme() {

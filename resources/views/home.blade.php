@@ -49,9 +49,9 @@
                 ];
             @endphp
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 reveal-stagger-group">
                 @foreach($bentoConfigs as $key => $config)
-                    <div class="{{ $config['span'] }} rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-400/80 dark:hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between">
+                    <div class="{{ $config['span'] }} stagger-item rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-400/80 dark:hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between">
                         
                         <!-- Ambient Corner Aura -->
                         <div class="pointer-events-none absolute -right-6 -bottom-6 w-36 h-36 bg-blue-500/5 dark:bg-sky-400/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500 -z-0"></div>
@@ -122,25 +122,16 @@
 
         <!-- Experiences & Education Timeline -->
         <section class="px-2 sm:px-6 lg:px-8 py-14 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-                <div class="max-w-2xl">
-                    <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Background</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
-                        Experience &amp; Education
-                    </h2>
-                </div>
-
-                <a href="{{ route('cv.download') }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 hover:bg-blue-50 dark:bg-slate-800/80 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-all self-start sm:self-auto shadow-xs group" title="Download Resume / CV (PDF)">
-                    <svg class="w-3.5 h-3.5 text-blue-600 dark:text-sky-400 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <span>{{ __('portfolio.hero.download_cv') }} (PDF)</span>
-                </a>
+            <div class="max-w-2xl mb-8">
+                <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-sky-400 font-semibold">Background</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC] mt-1">
+                    Experience &amp; Education
+                </h2>
             </div>
 
-            <div class="space-y-6 max-w-3xl">
+            <div class="space-y-6 max-w-3xl reveal-stagger-group">
                 @forelse($experiences as $exp)
-                    <div class="relative pl-6 sm:pl-8 border-l-2 border-blue-200 dark:border-blue-900 group">
+                    <div class="relative stagger-item pl-6 sm:pl-8 border-l-2 border-blue-200 dark:border-blue-900 group">
                         <!-- Timeline Node -->
                         <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-[#0A0F1D] border-2 border-blue-600 group-hover:scale-110 transition-transform"></div>
                         
@@ -211,7 +202,7 @@
         </div>
 
         <!-- Project Cards Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 reveal-stagger-group">
             @forelse($projects as $project)
                 @php
                     $catSlugs = $project->categories->pluck('slug')->toArray();
@@ -221,7 +212,7 @@
                     x-transition:enter="transition ease-out duration-200"
                     x-transition:enter-start="opacity-0 scale-95"
                     x-transition:enter-end="opacity-100 scale-100"
-                    class="group rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:shadow-blue-500/8 hover:border-blue-400/80 dark:hover:border-blue-500/60 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
+                    class="group stagger-item rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:shadow-blue-500/8 hover:border-blue-400/80 dark:hover:border-blue-500/60 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden">
                     
                     <div>
                         <!-- Faux Browser Header Bar -->
@@ -376,14 +367,14 @@
         </div>
 
         <!-- Credentials Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger-group">
             @forelse($trainings as $training)
                 <div 
                     x-show="activeType === 'all' || activeType === '{{ $training->type }}'"
                     x-transition:enter="transition ease-out duration-200"
                     x-transition:enter-start="opacity-0 scale-95"
                     x-transition:enter-end="opacity-100 scale-100"
-                    class="group rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-400/80 dark:hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+                    class="group stagger-item rounded-3xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-800 p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-xl hover:shadow-blue-500/5 hover:border-blue-400/80 dark:hover:border-blue-500/60 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
                     
                     <div>
                         <!-- Header: Activity Type & Sub-Vocation Badges -->
@@ -498,9 +489,9 @@
             </span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-stagger-group">
             @forelse($posts as $post)
-                <article class="p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs hover:border-blue-300 dark:hover:border-blue-500/60 transition-all flex flex-col justify-between group">
+                <article class="stagger-item p-6 rounded-2xl bg-white dark:bg-[#1E293B] border border-slate-200/90 dark:border-slate-700/80 shadow-xs hover:border-blue-300 dark:hover:border-blue-500/60 transition-all flex flex-col justify-between group">
                     <div>
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <div class="flex flex-wrap gap-1.5">
@@ -555,7 +546,7 @@
 
     <!-- Interactive Contact Form Section -->
     <section id="contact" class="scroll-mt-24 px-2 sm:px-6 lg:px-8 py-16 border-t border-slate-100 dark:border-slate-800/80 reveal-on-scroll">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start lg:items-end">
             
             <!-- Left Column: Context & Contact Details -->
             <div class="lg:col-span-5 flex flex-col gap-6">
