@@ -57,7 +57,10 @@ Route::get('/locale/{locale}', function (string $locale): RedirectResponse {
         Session::put('locale', $locale);
     }
 
-    return redirect()->back();
+    $previous = url()->previous();
+    $target = str_starts_with($previous, url('/')) ? $previous : route('home');
+
+    return redirect()->to($target);
 })->name('locale.switch');
 
 // Fallback login named route for standard auth middleware

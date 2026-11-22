@@ -26,7 +26,7 @@ class PortfolioSeeder extends Seeder
             ['email' => 'anang@example.com'],
             [
                 'name' => 'Anang Muhamad Lutfi',
-                'password' => Hash::make('password'),
+                'password' => Hash::make(env('ADMIN_SEED_PASSWORD', 'password')),
                 'email_verified_at' => now(),
             ]
         );

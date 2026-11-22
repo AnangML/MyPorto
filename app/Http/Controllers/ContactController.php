@@ -15,9 +15,12 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
+        $previous = url()->previous();
+        $target = str_starts_with($previous, url('/')) ? $previous : route('home');
+
         // 1. Silent Honeypot Drop for automated spam bots
         if (! empty($validated['website_hp'])) {
-            return redirect()->to(url()->previous().'#contact')
+            return redirect()->to($target.'#contact')
                 ->with('success', __('portfolio.contact.success_message'));
         }
 
@@ -31,7 +34,7 @@ class ContactController extends Controller
             'ip_hash' => hash('sha256', (string) $request->ip()),
         ]);
 
-        return redirect()->to(url()->previous().'#contact')
+        return redirect()->to($target.'#contact')
             ->with('success', __('portfolio.contact.success_message'));
     }
 }
